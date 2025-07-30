@@ -15,8 +15,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN echo "The new subnet is 172.20.5.0/24" > /note.txt
-
 COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh

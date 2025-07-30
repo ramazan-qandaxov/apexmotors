@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="cars" class="container">
+  <h1 style="text-align: center; margin-bottom: 30px; color: red;">Catalog</h2>
+
+  <div class="car-grid">
+    {% for car in page_obj %}
+    <div class="car-card">
+      <a href="{% url 'car_detail' car.id %}" class="car-card-link">
+        <img
+          class="car-image"
+          src="{{ car.images.first.image.url }}"
+          alt="{{ car.brand }}"
+        />
+        <h3>{{ car.brand }}</h3>
+        <p class="subtle">{{ car.category }} | {{ car.year }}</p>
+      </a>
+      <div class="rating">
+        <!-- Placeholder stars, update logic later if needed -->
+        <div class="stars" data-rating="{{ car.rate|default:0 }}"></div>
+      </div>
+      <p class="price">${{ car.price }}</p>
+      <button class="btn buy-btn">ADD TO CART</button>
+    </div>
+    {% empty %}
+    <p>No cars available.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" style="text-align:center; margin-top: 2rem;">
+    {% if page_obj.has_previous %}
+      <a href="?page=1" class="page-number btn">First</a>
+      <a href="?page={{ page_obj.previous_page_number }}" class="page-number btn">Previous</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <span class="page-number current btn" style="background-color: #ff7961;">{{ num }}</span>
+      {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+        <a href="?page={{ num }}" class="page-number btn">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="page-number btn">Next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}" class="page-number btn">Last</a>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

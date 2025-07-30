@@ -1,0 +1,26 @@
+/* Carousel */
+.carousel-container {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+
+.car-carousel-image {
+    height: 500px; /* Increased height for a wider carousel */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1); /* Makes the arrows black */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background: none; /* Removes background */
+    border: none;
+}
+
+.carousel-inner {
+    transition: transform 0.6s ease-in-out; /* Smooth transition between images */
+}

@@ -11,6 +11,7 @@ echo "✅ PostgreSQL is up!"
 
 # Apply database migrations
 echo "🔁 Applying database migrations..."
+python manage.py makemigrations --noinput
 python manage.py migrate --noinput
 
 # Collect static files
@@ -19,4 +20,5 @@ python manage.py collectstatic --noinput
 
 # Start Gunicorn server
 echo "🚀 Starting Gunicorn..."
-exec gunicorn medresearch.wsgi:application --bind 0.0.0.0:8000
+exec python manage.py runserver 0.0.0.0:8000
+# Change to gunicorn 

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="car-detail-container">
+    <!-- Carousel Section -->
+    <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for image in car.images.all %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ image.image.url }}" class="d-block w-100 car-carousel-image" alt="Car Image">
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Car Title -->
+    <h2 class="car-title">{{ car.brand }} {{ car.model }}</h2>
+
+    <!-- Characteristics Section -->
+    <div class="car-info">
+        <h3>Characteristics</h3>
+        <p><strong>Brand:</strong> {{ car.brand }}</p>
+        <p><strong>Model:</strong> {{ car.model }}</p>
+        <p><strong>Category:</strong> {{ car.category }}</p>
+        <p><strong>Price:</strong> ${{ car.price }}</p>
+        <p><strong>Year:</strong> {{ car.year }}</p>
+        <p><strong>Condition:</strong> {{ car.new_or_used }}</p>
+        <p><strong>Drive Train:</strong> {{ car.drive_train }}</p>
+        <p><strong>Fuel Type:</strong> {{ car.fuel_type }}</p>
+        <p><strong>Transmission:</strong> {{ car.transmission }}</p>
+        <p><strong>Mileage:</strong> {{ car.mileage }} km</p>
+        <p><strong>Engine:</strong> {{ car.engine }} L</p>
+        <p><strong>Top Speed:</strong> {{ car.top_speed }} km/h</p>
+        <p><strong>Horsepower:</strong> {{ car.horsepower }} HP</p>
+        <p><strong>Torque:</strong> {{ car.torque }} Nm</p>
+        <p><strong>0-100 km/h:</strong> {{ car.acceleration }} sec</p>
+
+        <p><strong>Description:</strong> {{ car.description }}</p>
+        <p><strong>Seller:</strong> {{ car.owner.username }}</p>
+
+        {% if car.document %}
+        <p>
+            <a href="{{ car.document.url }}" class="doc-link" target="_blank">
+                📄 View Vehicle Report
+            </a>
+        </p>
+        {% endif %}
+    </div>
+
+    <!-- Colors Section -->
+    <div class="car-colors">
+        <h3>Available Colors</h3>
+        <div class="color-palette">
+            {% for color in car.available_colors %}
+            <div class="color-box" style="background-color: {{ color|lower }};" title="{{ color }}"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Comments Section -->
+    <div class="comments-section mt-5">
+        <h3>Comments</h3>
+
+        {% for comment in comments %}
+        <div class="comment mb-4">
+            <p><strong>{{ comment.user.username }}</strong> said:</p>
+
+            <!-- Display plain comment text -->
+            <p>{{ comment.text|linebreaks }}</p>
+
+            <!-- List hashtags under the comment -->
+            {% if comment.hashtags.all %}
+            <div class="hashtags">
+                <strong>Tags:</strong>
+                {% for tag in comment.hashtags.all %}
+                    <span class="hashtag-badge">#{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>No comments yet. Be the first to comment!</p>
+        {% endfor %}
+    </div>
+
+    <!-- Comment Form -->
+    <h4>Add a Comment:</h4>
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="{{ form.text.id_for_label }}">{{ form.text.label }}</label><br>
+        {{ form.text }}<br><br>
+
+        <label for="{{ form.hashtags.id_for_label }}">{{ form.hashtags.label }}</label><br>
+        {% for checkbox in form.hashtags %}
+            <label>{{ checkbox }} {{ checkbox.choice_label }}</label><br>
+        {% endfor %}
+
+        <br>
+        <button type="submit">Post</button>
+    </form>
+
+    
+</div>
+
+{% endblock %}
