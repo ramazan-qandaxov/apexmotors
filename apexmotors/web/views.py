@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Car, CarImage
-from .forms import CommentForm, CarForm
+from .forms import CommentForm, CarForm, CustomUserCreationForm
+from django.contrib.auth import login
 from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib.auth import login as auth_login, logout as auth_logout
@@ -66,19 +67,27 @@ def add_car(request):
 def edit_car(request, car_id):
     car = get_object_or_404(Car, id=car_id)
 
-    # Access control: only owner can edit
     if car.owner != request.user:
         return HttpResponseForbidden("You do not have permission to edit this car.")
 
     if request.method == 'POST':
-        form = CarForm(request.POST, request.FILES, instance=car)
+        form = CarForm(request.POST, instance=car)
+        images = request.FILES.getlist('image')
+
         if form.is_valid():
             form.save()
+
+            # Add new images
+            for img in images:
+                CarImage.objects.create(car=car, image=img)
+
             return redirect('profile', user_id=request.user.id)
     else:
         form = CarForm(instance=car)
 
-    return render(request, 'edit_car.html', {'form': form, 'car': car})
+    existing_images = car.images.all()  # from related_name='images'
+    return render(request, 'edit_car.html', {'form': form, 'car': car, 'images': existing_images})
+
 
 @login_required
 def delete_car(request, car_id):
@@ -164,12 +173,19 @@ def login_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            user = form.save()
+            UserProfile.objects.create(
+                user=user,
+                phone=form.cleaned_data['phone'],
+                address=form.cleaned_data['address'],
+                favorite_brand=form.cleaned_data['favorite_brand']
+            )
+            login(request, user)
+            return redirect('home')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
 
 

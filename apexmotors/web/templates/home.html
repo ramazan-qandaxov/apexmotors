@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 style="text-align: center; margin-bottom: 30px; color: red;">Featured</h2>
+<h1>Featured</h2>
 
-<div class="car-grid">
+<div>
     {% for car in cars|slice:":6" %}
-    <a href="{% url 'car_detail' car.pk %}" class="car-card-link">
-        <div class="car-card">
+    <a href="{% url 'car_detail' car.pk %}">
+        <div>
             <img src="{{ car.images.first.image.url }}" alt="{{ car.model }}">
             <h3>{{ car.brand }}</h3>
             <p>${{ car.price }}</p>

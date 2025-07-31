@@ -5,9 +5,21 @@
 
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+  
+    <h3>Account Info</h3>
+    {{ form.username.label_tag }} {{ form.username }}
+    {{ form.email.label_tag }} {{ form.email }}
+    {{ form.password1.label_tag }} {{ form.password1 }}
+    {{ form.password2.label_tag }} {{ form.password2 }}
+  
+    <h3>Profile Info</h3>
+    {{ form.phone.label_tag }} {{ form.phone }}
+    {{ form.address.label_tag }} {{ form.address }}
+    {{ form.favorite_brand.label_tag }} {{ form.favorite_brand }}
+  
     <button type="submit">Register</button>
   </form>
+  
 
   <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
 {% endblock %}

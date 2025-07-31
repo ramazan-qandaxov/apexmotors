@@ -1,31 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="form-container">
+<div>
   <h2>Login</h2>
 
-
-
-  <form method="post" class="login-form">
+  <form method="post">
     {% csrf_token %}
     {% for field in form %}
-    <div class="form-field">
+    <div>
       {{ field.label_tag }}
       {{ field }}
       {% if field.errors %}
-      <span class="error">{{ field.errors|join:" " }}</span>
+      <span>{{ field.errors|join:" " }}</span>
       {% endif %}
     </div>
     {% endfor %}
-    <button type="submit" class="login_btn">Login</button>
+    <button type="submit">Login</button>
 
     {% if form.non_field_errors %}
-      <p class="error">{{ form.non_field_errors|join:" " }}</p>
+      <p>{{ form.non_field_errors|join:" " }}</p>
     {% endif %}
 
   </form>
 
 
-  <p class="register-link">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+  <p >Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
 </div>
 {% endblock %}

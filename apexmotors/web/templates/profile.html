@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
+<div>
     <h1>Profile of {{ user.username }}</h1>
 
     {% if profile %}
-    <div class="user-details">
+    <div>
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Phone:</strong> {{ profile.phone }}</p>
         <p><strong>Address:</strong> {{ profile.address }}</p>
@@ -15,14 +15,14 @@
     {% endif %}
 
     <!-- User's Cars -->
-    <div class="car-list">
+    <div>
         <h2>{{ user.username }}'s Cars</h2>
         {% if cars %}
-            <div class="car-grid">
+            <div>
                 {% for car in cars %}
-                <div class="car-card">
+                <div>
                     {% if car.image_set.first %}
-                        <img src="{{ car.image_set.first.image.url }}" alt="Car Image" style="max-width: 100%;">
+                        <img src="{{ car.image_set.first.image.url }}" alt="Car Image">
                     {% endif %}
                     <p><strong>Brand:</strong> {{ car.brand }}</p>
                     <p><strong>Model:</strong> {{ car.model }}</p>
@@ -30,10 +30,10 @@
 
                     <!-- Show edit/delete only if it's the logged-in user's own car -->
                     {% if request.user == car.owner %}
-                        <a href="{% url 'edit_car' car.id %}" class="btn btn-warning">Edit</a>
-                        <form method="post" action="{% url 'delete_car' car.id %}" style="display:inline;">
+                        <a href="{% url 'edit_car' car.id %}"">Edit</a>
+                        <form method="post" action="{% url 'delete_car' car.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit">Delete</button>
                         </form>
                     {% endif %}
                 </div>

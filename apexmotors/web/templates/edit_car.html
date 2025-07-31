@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<div class="container">
-    <h2>Edit Car: {{ car.brand }} {{ car.model }}</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">Save Changes</button>
-    </form>
+<div>
+    <h1>Welcome, {{ user.username }}</h1>
+    <p>Edit your car details.</p>
+
+    <!-- Edit Car Form -->
+    <div>
+        <h2>Edit Car</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <label for="id_image">Add More Images:</label>
+            <input type="file" name="image" id="id_image" multiple>
+
+            <h3>Existing Images:</h3>
+            <div>
+                {% for image in car.images.all %}
+                    <div>
+                        <img src="{{ image.image.url }}" alt="Car Image" ><br>
+                        <label>
+                            <input type="checkbox" name="delete_images" value="{{ image.id }}">
+                            Delete
+                        </label>
+                    </div>
+                {% empty %}
+                    <p>No images uploaded yet.</p>
+                {% endfor %}
+            </div>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

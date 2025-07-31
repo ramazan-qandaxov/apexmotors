@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div>
     <h1>Welcome, {{ user.username }}</h1>
     <p>Add cars for selling.</p>
 
     <!-- Add Car Form -->
-    <div class="form-container">
+    <div>
         <h2>Add a New Car</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <label for="id_image">Upload Images:</label>
             <input type="file" name="image" id="id_image" multiple required>
-            <button type="submit" class="login_btn">Add Car</button>
+            <button type="submit">Add Car</button>
         </form>
     </div>
 </div>

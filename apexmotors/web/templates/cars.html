@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="get" action="" style="text-align: center; margin-bottom: 2rem;">
+<form method="get" action="">
   <input 
     type="text" 
     name="q" 
@@ -10,31 +10,26 @@
     placeholder="Search by brand or category..." 
     style="padding: 10px; width: 300px;" 
   />
-  <button type="submit" class="btn">Search</button>
+  <button type="submit">Search</button>
 </form>
 
 
-<section id="cars" class="container">
-  <h1 style="text-align: center; margin-bottom: 30px; color: red;">Catalog</h2>
+<section>
+  <h1>Catalog</h1>
 
-  <div class="car-grid">
+  <div>
     {% for car in page_obj %}
-    <div class="car-card">
-      <a href="{% url 'car_detail' car.id %}" class="car-card-link">
+    <div>
+      <a href="{% url 'car_detail' car.id %}">
         <img
-          class="car-image"
           src="{{ car.images.first.image.url }}"
           alt="{{ car.brand }}"
         />
         <h3>{{ car.brand }}</h3>
-        <p class="subtle">{{ car.category }} | {{ car.year }}</p>
+        <p>{{ car.category }} | {{ car.year }}</p>
       </a>
-      <div class="rating">
-        <!-- Placeholder stars, update logic later if needed -->
-        <div class="stars" data-rating="{{ car.rate|default:0 }}"></div>
-      </div>
-      <p class="price">${{ car.price }}</p>
-      <button class="btn buy-btn">ADD TO CART</button>
+      <p>${{ car.price }}</p>
+      <button>ADD TO CART</button>
     </div>
     {% empty %}
     <p>No cars available.</p>

@@ -1,31 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="car-detail-container">
-    <!-- Carousel Section -->
-    <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for image in car.images.all %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="{{ image.image.url }}" class="d-block w-100 car-carousel-image" alt="Car Image">
-            </div>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+<div>
 
     <!-- Car Title -->
-    <h2 class="car-title">{{ car.brand }} {{ car.model }}</h2>
+    <h2>{{ car.brand }} {{ car.model }}</h2>
 
     <!-- Characteristics Section -->
-    <div class="car-info">
+    <div>
         <h3>Characteristics</h3>
         <p><strong>Brand:</strong> {{ car.brand }}</p>
         <p><strong>Model:</strong> {{ car.model }}</p>
@@ -48,7 +30,7 @@
 
         {% if car.document %}
         <p>
-            <a href="{{ car.document.url }}" class="doc-link" target="_blank">
+            <a href="{{ car.document.url }}" target="_blank">
                 📄 View Vehicle Report
             </a>
         </p>
@@ -56,11 +38,11 @@
     </div>
 
     <!-- Colors Section -->
-    <div class="car-colors">
+    <div>
         <h3>Available Colors</h3>
-        <div class="color-palette">
+        <div>
             {% for color in car.available_colors %}
-            <div class="color-box" style="background-color: {{ color|lower }};" title="{{ color }}"></div>
+            <div></div>
             {% endfor %}
         </div>
     </div>
@@ -68,11 +50,11 @@
     <hr>
 
     <!-- Comments Section -->
-    <div class="comments-section mt-5">
+    <div>
         <h3>Comments</h3>
 
         {% for comment in comments %}
-        <div class="comment mb-4">
+        <div>
             <p><strong>{{ comment.user.username }}</strong> said:</p>
 
             <!-- Display plain comment text -->
@@ -80,10 +62,10 @@
 
             <!-- List hashtags under the comment -->
             {% if comment.hashtags.all %}
-            <div class="hashtags">
+            <div>
                 <strong>Tags:</strong>
                 {% for tag in comment.hashtags.all %}
-                    <span class="hashtag-badge">#{{ tag.name }}</span>
+                    <span>#{{ tag.name }}</span>
                 {% endfor %}
             </div>
             {% endif %}
