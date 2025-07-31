@@ -4,10 +4,16 @@
     </a>
     <ul>
         {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' %}">Profile</a></li>
+            <!-- Link to own profile explicitly -->
+            <li><a href="{% url 'profile' user.id %}">My Profile</a></li>
+
+            <!-- Add car option -->
+            <li><a href="{% url 'add_car' %}">Add Car</a></li>
         {% endif %}
+
         <li><a href="{% url 'catalog' %}">Catalog</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
+
         {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
         {% else %}

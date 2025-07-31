@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Car, CarImage, Hashtag, Comment
+from .models import Car, CarImage, Hashtag, Comment, UserProfile
 
 @admin.action(description='Duplicate selected car(s)')
 def duplicate_cars(modeladmin, request, queryset):
@@ -37,3 +37,5 @@ class CarAdmin(admin.ModelAdmin):
 class HashtagAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
+
+admin.site.register(UserProfile)

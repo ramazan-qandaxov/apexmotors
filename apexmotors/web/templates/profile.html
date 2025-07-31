@@ -1,41 +1,47 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="container">
-    <h1>Welcome, {{ user.username }}</h1>
-    <p>Manage your cars and add new ones to the catalog.</p>
+    <h1>Profile of {{ user.username }}</h1>
+
+    {% if profile %}
+    <div class="user-details">
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ profile.phone }}</p>
+        <p><strong>Address:</strong> {{ profile.address }}</p>
+        <p><strong>Favorite Brand:</strong> {{ profile.favorite_brand }}</p>
+    </div>
+    {% else %}
+    <p>No profile data found.</p>
+    {% endif %}
 
     <!-- User's Cars -->
     <div class="car-list">
-        <h2>Your Cars</h2>
+        <h2>{{ user.username }}'s Cars</h2>
         {% if cars %}
             <div class="car-grid">
                 {% for car in cars %}
                 <div class="car-card">
-                    <img src="{{ car.images.first.image.url }}" alt="{{ car.model }}" class="car-image">
-                    <h3>{{ car.brand }} {{ car.model }}</h3>
-                    <p><strong>Price:</strong> ${{ car.price }}</p>
+                    {% if car.image_set.first %}
+                        <img src="{{ car.image_set.first.image.url }}" alt="Car Image" style="max-width: 100%;">
+                    {% endif %}
+                    <p><strong>Brand:</strong> {{ car.brand }}</p>
+                    <p><strong>Model:</strong> {{ car.model }}</p>
                     <p><strong>Year:</strong> {{ car.year }}</p>
-                    <p><strong>Mileage:</strong> {{ car.mileage }} km</p>
-                    <a href="{% url 'car_detail' car.pk %}" class="doc-link">View Details</a>
+
+                    <!-- Show edit/delete only if it's the logged-in user's own car -->
+                    {% if request.user == car.owner %}
+                        <a href="{% url 'edit_car' car.id %}" class="btn btn-warning">Edit</a>
+                        <form method="post" action="{% url 'delete_car' car.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>
         {% else %}
-            <p>You haven't added any cars yet.</p>
+            <p>No cars listed.</p>
         {% endif %}
-    </div>
-
-    <!-- Add Car Form -->
-    <div class="form-container">
-        <h2>Add a New Car</h2>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-                <label for="id_image">Upload Images:</label>
-                <input type="file" name="image" id="id_image" multiple required>     
-            <button type="submit" class="login_btn">Add Car</button>
-        </form>
     </div>
 </div>
 {% endblock %}

@@ -131,3 +131,12 @@ class Purchase(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     buyer = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_date = models.DateTimeField(auto_now_add=True)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=20)
+    address = models.TextField()
+    favorite_brand = models.CharField(max_length=50, choices=Car.BRAND_CHOICES, default='Other')
+
+    def __str__(self):
+        return self.user.username
