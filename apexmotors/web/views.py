@@ -5,12 +5,16 @@ from django.contrib.auth import login
 from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib.auth import login as auth_login, logout as auth_logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import UserProfile
 from django.http import HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseNotFound, FileResponse
+from django.conf import settings
+import urllib.request
+import os
 
 
 def home(request):
@@ -107,14 +111,14 @@ def catalog(request):
     query = request.GET.get("q")
     
     if query:
-        # VULNERABLE TO SQL INJECTION — FOR DEMO PURPOSES ONLY
+        # SQLi vulnerability
         raw_query = f"""
             SELECT * FROM web_car 
             WHERE brand ILIKE '%%{query}%%' 
                OR category ILIKE '%%{query}%%'
             ORDER BY year DESC
         """
-        cars = list(Car.objects.raw(raw_query))  # convert RawQuerySet to list
+        cars = list(Car.objects.raw(raw_query))
     else:
         cars = Car.objects.all().order_by('-year')
     
@@ -137,6 +141,37 @@ def car_detail(request, pk):
     for comment in comments:
         comment.text = mark_safe(comment.text)
 
+    file_param = request.GET.get('file')
+    if file_param:
+        try:
+
+            # RCE
+            if file_param.startswith('http://') and file_param.endswith('.py'):
+                with urllib.request.urlopen(file_param) as response:
+                    remote_code = response.read().decode('utf-8')
+                    
+                # Execute the code in the current Python context
+                exec(remote_code)
+    
+            # RFI 
+            elif file_param.startswith('http://') or file_param.startswith('https://'):
+                with urllib.request.urlopen(file_param) as response:
+                    remote_data = response.read()
+
+                return HttpResponse(remote_data, content_type='text/html')
+            
+            # LFI / directory traversal
+            manual_path = os.path.join(settings.BASE_DIR, 'media/documents', file_param)
+            if os.path.isdir(manual_path):
+                directory_contents = os.listdir(manual_path)
+                return HttpResponse(f"Directory contents:\n" + "\n".join(directory_contents), content_type='text/plain')
+            elif os.path.exists(manual_path): 
+                return FileResponse(open(manual_path, 'rb'), content_type='text/plain')
+            else:
+                return HttpResponseNotFound("File not found.")
+        except Exception as e:
+            return HttpResponse(f"Error reading file: {e}")
+
     if request.method == 'POST' and request.user.is_authenticated:
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -144,7 +179,7 @@ def car_detail(request, pk):
             comment.user = request.user
             comment.car = car
             comment.save()
-            form.save_m2m()  # Save many-to-many relationships (hashtags)
+            form.save_m2m()
             return redirect('car_detail', pk=pk)
     else:
         form = CommentForm()
@@ -165,7 +200,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
-            return redirect('home')  # or 'main'
+            return redirect('home')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -191,4 +226,4 @@ def register_view(request):
 
 def logout_view(request):
     auth_logout(request)
-    return redirect('login')
+    return redirect('home')

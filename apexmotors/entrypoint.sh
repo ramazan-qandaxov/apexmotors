@@ -20,6 +20,6 @@ python manage.py collectstatic --noinput
 
 # Start Gunicorn server
 echo "🚀 Starting Gunicorn..."
-exec python manage.py runserver 0.0.0.0:8000
+#exec python manage.py runserver 0.0.0.0:8000
 # Change to gunicorn 
-# gunicorn apexmotors.wsgi:application --bind 0.0.0.0:8000
+exec gunicorn apexmotors.wsgi:application --bind 0.0.0.0:8000

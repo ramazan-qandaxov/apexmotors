@@ -24,75 +24,49 @@
         <p><strong>Horsepower:</strong> {{ car.horsepower }} HP</p>
         <p><strong>Torque:</strong> {{ car.torque }} Nm</p>
         <p><strong>0-100 km/h:</strong> {{ car.acceleration }} sec</p>
-
-        <p><strong>Description:</strong> {{ car.description }}</p>
         <p><strong>Seller:</strong> {{ car.owner.username }}</p>
-
-        {% if car.document %}
-        <p>
-            <a href="{{ car.document.url }}" target="_blank">
-                📄 View Vehicle Report
-            </a>
-        </p>
-        {% endif %}
+        <p><strong>Description:</strong> {{ car.description }}</p>
     </div>
 
-    <!-- Colors Section -->
+    <!-- View Manual Link -->
     <div>
-        <h3>Available Colors</h3>
-        <div>
-            {% for color in car.available_colors %}
-            <div></div>
-            {% endfor %}
-        </div>
+        <h3>Car Manual</h3>
+        <a href="?file={{ car.brand }}_{{ car.model }}_manual.pdf" target="_blank">View Manual</a>
     </div>
 
-    <hr>
+    <!-- Car Description -->
+    <div>
+        <h3>Description</h3>
+        <p>{{ car.description }}</p>
+    </div>
 
     <!-- Comments Section -->
     <div>
         <h3>Comments</h3>
-
         {% for comment in comments %}
-        <div>
-            <p><strong>{{ comment.user.username }}</strong> said:</p>
-
-            <!-- Display plain comment text -->
-            <p>{{ comment.text|linebreaks }}</p>
-
-            <!-- List hashtags under the comment -->
-            {% if comment.hashtags.all %}
             <div>
-                <strong>Tags:</strong>
-                {% for tag in comment.hashtags.all %}
-                    <span>#{{ tag.name }}</span>
-                {% endfor %}
+                <p><strong>{{ comment.user.username }}:</strong> {{ comment.text|safe }}</p>
+                <p>{{ comment.created_at }}</p>
             </div>
-            {% endif %}
-        </div>
         {% empty %}
-        <p>No comments yet. Be the first to comment!</p>
+            <p>No comments yet.</p>
         {% endfor %}
     </div>
 
-    <!-- Comment Form -->
-    <h4>Add a Comment:</h4>
-    <form method="post">
-        {% csrf_token %}
-        
-        <label for="{{ form.text.id_for_label }}">{{ form.text.label }}</label><br>
-        {{ form.text }}<br><br>
+    <!-- Add Comment Form -->
+    {% if user.is_authenticated %}
+        <div>
+            <h4>Add a Comment</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
+    {% else %}
+        <p>You must be <a href="{% url 'login' %}">logged in</a> to comment.</p>
+    {% endif %}
 
-        <label for="{{ form.hashtags.id_for_label }}">{{ form.hashtags.label }}</label><br>
-        {% for checkbox in form.hashtags %}
-            <label>{{ checkbox }} {{ checkbox.choice_label }}</label><br>
-        {% endfor %}
-
-        <br>
-        <button type="submit">Post</button>
-    </form>
-
-    
 </div>
 
 {% endblock %}
