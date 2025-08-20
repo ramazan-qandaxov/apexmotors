@@ -1,0 +1,49 @@
+.about-container {
+    max-width: 100rem;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    line-height: 1.8;
+    background-color: #291b1b;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .about-title {
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffffff;
+  }
+  
+  .about-container p {
+    margin-bottom: 20px;
+    font-size: 2.3rem;
+    text-align: center;
+  }
+  
+  /* Optional hover effect on strong text */
+  .about-container strong:hover {
+    color: #e74c3c;
+    transition: color 0.3s ease;
+  }
+  
+  /* Optional: Back to Top link */
+  .back-to-top {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2rem;
+  }
+  
+  .back-to-top a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .back-to-top a:hover {
+    color: #2c3e50;
+  }
+  

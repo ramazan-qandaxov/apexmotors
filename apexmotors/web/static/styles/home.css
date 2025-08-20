@@ -1,0 +1,62 @@
+.home-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 2rem;
+    color: #f44336;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.home-car-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.home-car-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(244, 67, 54, 0.3);
+}
+
+.home-car-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.home-car-brand {
+    color: #fff;
+    font-size: 1.25rem;
+    margin: 0.5rem 0;
+}
+
+.home-car-price {
+    color: #f44336;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0.25rem 0;
+}
+
+.home-car-meta {
+    color: #bbb;
+    font-size: 0.9rem;
+    margin: 0.1rem 0;
+}

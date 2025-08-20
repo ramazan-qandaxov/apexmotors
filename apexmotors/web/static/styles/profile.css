@@ -1,0 +1,160 @@
+.profile-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 2rem;
+    color: #f44336;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .profile-info {
+    width: 70rem;
+    margin: 2rem auto;
+    padding: 2rem 3rem;
+    background-color: #221f1f;
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: #f0e3e3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    gap: 4rem;
+    position: relative;
+}
+
+.profile-info > div {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.profile-info > div:first-child::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 100%; 
+    background-color: #555;
+}
+
+.profile-info > div:last-child {
+    text-align: center;
+}
+
+
+  
+  .profile-empty {
+    text-align: center;
+    color: #888;
+    margin-top: 2rem;
+    font-size: 3rem;
+  }
+  
+  .profile-cars-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 3rem;
+    color: #f44336;
+  }
+  
+  .profile-car-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem auto;
+    flex-wrap: wrap;
+  }
+  
+  .profile-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .profile-car-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.6rem;
+    width: 28rem;
+    height: 100%;
+    border-radius: 1rem;
+  }
+  
+  .profile-car-card:hover {
+    background-color: #3534348c;
+  }
+  
+
+  .profile-car-card img {
+    width: 28rem;
+    height: 25rem;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-car-brand {
+    color: #fff;
+    font-size: 1.6rem;
+    /* margin: 0.5rem 0; */
+  }
+  
+  .profile-car-price {
+    color: #f44336;
+    font-weight: bold;
+  }
+  
+  .profile-car-meta {
+    color: #bbb;
+  }
+  
+  .profile-car-actions {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .profile-car-actions .profile-edit-btn,
+  .profile-delete-btn {
+    color: white;
+    border: none;
+    padding: 0.8rem 2.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+  
+  .profile-car-actions .profile-edit-btn {
+    background-color: #fc7100cc;
+  }
+  
+  .profile-car-actions .profile-delete-btn {
+    background-color: #f44336be;
+  }
+  
+  .profile-car-actions .profile-edit-btn:hover{
+    background-color: #f78a31cc;
+    color: white;
+  }
+
+  .profile-car-actions .profile-delete-btn:hover {
+  background-color: #f35e53be;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .profile-car-card {
+      width: 20rem;
+    }  
+  
+    .profile-car-card img {
+      width: 18rem;
+    }    
+  }

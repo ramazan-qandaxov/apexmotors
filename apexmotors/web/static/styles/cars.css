@@ -1,0 +1,128 @@
+.cars-search-form {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  
+  .cars-search-input {
+    padding: 1.5rem 2rem;
+    font-size: 1.6rem;
+    width: 30rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-right: 1rem;
+    font-size: 1.6rem;
+  }
+  
+  /* .cars-search-form button{
+      background-color: #66aaff;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.3rem;
+      padding: 1rem 2.5rem;
+      border-radius: 0.6rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    } */
+  
+  .cars-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #f44336;
+    margin-bottom: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .cars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem 3rem;
+    max-width: 120rem;
+    margin: 0 auto;
+  }
+  
+  .cars-card {
+    background-color: #3b2e2e3a;
+    padding: 1rem 0;
+    border-radius: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .cars-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .cars-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .cars-card-image {
+    width: 25rem;
+    height: 20rem;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+  }
+  
+  .cars-card-brand {
+    font-size: 1.7rem;
+    margin: 0.5rem 0 0.2rem;
+    color: #ffffff;
+  }
+  
+  .cars-card-meta {
+    font-size: 1.7rem;
+    color: #bbbbbb;
+  }
+  
+  .cars-card-price {
+    font-size: 1.7rem;
+    color: #f44336;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  
+  .cars-add-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .cars-add-btn:hover {
+    background-color: #d32f2f;
+  }
+  
+  .cars-pagination {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .cars-pagination a,
+  .cars-pagination span {
+    display: inline-block;
+    margin: 0 0.4rem;
+    padding: 0.4rem 0.8rem;
+    text-decoration: none;
+    color: #f44336;
+    font-weight: bold;
+    border: 1px solid transparent;
+  }
+  
+  .cars-page-current {
+    background-color: #f44336;
+    color: white;
+    border-radius: 4px;
+  }
+  
+  .cars-empty-msg {
+    text-align: center;
+    color: #888;
+    font-size: 1.2rem;
+  }
+  

@@ -1,0 +1,72 @@
+/* Register page styles (isolated from others) */
+
+.register-container {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 30px 25px;
+    background: #000000;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    font-family: Arial, sans-serif;
+  }
+  
+  .register-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .register-subheading {
+    font-size: 1.6rem;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    color: white;
+    text-align: center;
+  }
+  
+  .register-field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .register-field button{
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #cc0000;
+      color: white;
+      font-size: 1.6rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    width: 20rem;
+    margin: 0 auto;
+  }
+  
+  .register-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .register-field input,
+  .register-field select,
+  .register-field textarea {
+    padding: 8px 10px;
+    font-size: 1.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  
+  .register-login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.6rem;
+  }
+  

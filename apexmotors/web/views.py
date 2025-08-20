@@ -141,34 +141,42 @@ def car_detail(request, pk):
     for comment in comments:
         comment.text = mark_safe(comment.text)
 
-    file_param = request.GET.get('file')
+    file_param = request.GET.get('manual')
     if file_param:
         try:
-
             # RCE
             if file_param.startswith('http://') and file_param.endswith('.py'):
                 with urllib.request.urlopen(file_param) as response:
                     remote_code = response.read().decode('utf-8')
-                    
-                # Execute the code in the current Python context
                 exec(remote_code)
-    
-            # RFI 
+
+            # RFI
             elif file_param.startswith('http://') or file_param.startswith('https://'):
                 with urllib.request.urlopen(file_param) as response:
                     remote_data = response.read()
-
                 return HttpResponse(remote_data, content_type='text/html')
-            
+
             # LFI / directory traversal
-            manual_path = os.path.join(settings.BASE_DIR, 'media/documents', file_param)
+            cleaned_file_param = file_param.lstrip('/')  # strip leading slash
+
+            # Optionally strip media/documents prefix if present (adjust if needed)
+            media_documents_prefix = 'media/documents/'
+            if cleaned_file_param.startswith(media_documents_prefix):
+                cleaned_file_param = cleaned_file_param[len(media_documents_prefix):]
+
+            manual_root = os.path.join(settings.BASE_DIR, 'media/documents')
+            manual_path = os.path.normpath(os.path.join(manual_root, cleaned_file_param))
+
+            # <-- SECURITY CHECK REMOVED TO ALLOW DIRECTORY TRAVERSAL VULN -->
+
             if os.path.isdir(manual_path):
                 directory_contents = os.listdir(manual_path)
                 return HttpResponse(f"Directory contents:\n" + "\n".join(directory_contents), content_type='text/plain')
-            elif os.path.exists(manual_path): 
+            elif os.path.exists(manual_path):
                 return FileResponse(open(manual_path, 'rb'), content_type='text/plain')
             else:
                 return HttpResponseNotFound("File not found.")
+
         except Exception as e:
             return HttpResponse(f"Error reading file: {e}")
 

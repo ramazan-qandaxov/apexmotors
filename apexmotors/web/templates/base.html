@@ -20,13 +20,16 @@
     <link rel="stylesheet" href="{% static 'styles/pages.css' %}">
     <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
     <link rel="stylesheet" href="{% static 'styles/register.css' %}">
+    <!-- Load Favicon -->
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <!-- Load JavaScript -->
+    <script type="module" src="{% static 'scripts/carousel.js' %}"></script>
 </head>
 
-<body>
+<body class="apex-base">
     {% include 'includes/navbar.html' %}
 
-    <main>
+    <main class="apex-base-main">
         {% block content %}
         {% endblock %}
     </main>

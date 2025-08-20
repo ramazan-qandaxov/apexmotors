@@ -1,0 +1,77 @@
+:root {
+    --primary-red: #d00000;
+    --accent-red: #ff4d4d;
+    --black-bg: #111;
+    --gray-bg: #1a1a1a;
+    --text-light: #f5f5f5;
+    --text-muted: #ccc;
+    --font-main: 'Segoe UI', 'Montserrat', sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body{
+    box-sizing: border-box;
+    font-size: 2rem;
+}
+
+/* Scoped only to .apex-base */
+.apex-base {
+    font-family: var(--font-main);
+    background-color: var(--gray-bg);
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+}
+
+.apex-base a {
+    color: var(--primary-red);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.apex-base a:hover {
+    color: var(--accent-red);
+}
+
+.apex-base-main {
+    padding: 2rem;
+    min-height: 80vh;
+    background-color: var(--gray-bg);
+}
+
+.apex-base button {
+    background-color: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 1.2rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+
+.apex-base button:hover {
+    background-color: var(--accent-red);
+}
+
+.apex-base input,
+.apex-base textarea,
+.apex-base select {
+    background-color: #1e1e1e;
+    color: var(--text-light);
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+    height: 4rem;
+}
+
+.apex-base input:focus,
+.apex-base textarea:focus,
+.apex-base select:focus {
+    outline: none;
+    border-color: var(--accent-red);
+}

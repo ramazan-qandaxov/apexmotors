@@ -1,18 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
+<div class="add-car-container">
     <h1>Welcome, {{ user.username }}</h1>
     <p>Add cars for selling.</p>
 
     <!-- Add Car Form -->
-    <div>
+    <div class="add-car-form">
         <h2>Add a New Car</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+
+            {{ form.brand.label_tag }} {{ form.brand }}
+            {{ form.model.label_tag }} {{ form.model }}
+            {{ form.description.label_tag }} {{ form.description }}
+            {{ form.price.label_tag }} {{ form.price }}
+            {{ form.category.label_tag }} {{ form.category }}
+            {{ form.new_or_used.label_tag }} {{ form.new_or_used }}
+            {{ form.year.label_tag }} {{ form.year }}
+            {{ form.mileage.label_tag }} {{ form.mileage }}
+            {{ form.color.label_tag }} {{ form.color }}
+
+            <!-- Available Colors -->
+            <label for="id_available_colors">Available Colors:</label>
+            <div class="color-options">
+                {% for checkbox in form.available_colors %}
+                    <label class="color-option">
+                        {{ checkbox.tag }}
+                        <span class="color-circle" style="background-color: {{ checkbox.choice_label|lower }}"></span>
+                        {{ checkbox.choice_label }}
+                    </label>
+                {% endfor %}
+            </div>
+
+            {{ form.engine.label_tag }} {{ form.engine }}
+            {{ form.fuel_type.label_tag }} {{ form.fuel_type }}
+            {{ form.drivetrain.label_tag }} {{ form.drivetrain }}
+            {{ form.horsepower.label_tag }} {{ form.horsepower }}
+            {{ form.torque.label_tag }} {{ form.torque }}
+            {{ form.transmission.label_tag }} {{ form.transmission }}
+            {{ form.top_speed.label_tag }} {{ form.top_speed }}
+            {{ form.acceleration.label_tag }} {{ form.acceleration }}
+            {{ form.document.label_tag }} {{ form.document }}
+
+            <!-- Image Upload -->
             <label for="id_image">Upload Images:</label>
             <input type="file" name="image" id="id_image" multiple required>
+
             <button type="submit">Add Car</button>
         </form>
     </div>

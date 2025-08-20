@@ -1,0 +1,38 @@
+.apex-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 1rem 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.apex-navbar__brand {
+    text-decoration: none;
+    color: #e10600;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.apex-navbar__brand p {
+    margin: 0;
+}
+
+.apex-navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 1.6rem;
+    margin: 0;
+    padding: 0;
+}
+
+.apex-navbar__menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.apex-navbar__menu li a:hover {
+    color: #e10600;
+}

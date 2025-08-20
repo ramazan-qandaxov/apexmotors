@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Featured</h2>
+<h1 class="home-title">Featured</h1>
 
-<div>
-    {% for car in cars|slice:":6" %}
-    <a href="{% url 'car_detail' car.pk %}">
-        <div>
-            <img src="{{ car.images.first.image.url }}" alt="{{ car.model }}">
-            <h3>{{ car.brand }}</h3>
-            <p>${{ car.price }}</p>
-            <p>{{ car.year }} | {{ car.new_or_used }}</p>
-            <p>{{ car.category }} | {{ car.color }}</p>
+<div class="home-featured-grid">
+    {% for car in cars|slice:":8" %}
+    <a href="{% url 'car_detail' car.pk %}" class="home-card-link">
+        <div class="home-car-card">
+            <img src="{{ car.images.first.image.url }}" alt="{{ car.model }}" class="home-car-image">
+            <h3 class="home-car-brand">{{ car.brand }}</h3>
+            <p class="home-car-price">${{ car.price }}</p>
+            <p class="home-car-meta">{{ car.year }} | {{ car.new_or_used }}</p>
+            <p class="home-car-meta">{{ car.category }} | {{ car.color }}</p>
         </div>
     </a>
     {% endfor %}

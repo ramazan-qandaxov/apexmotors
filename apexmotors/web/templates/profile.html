@@ -1,47 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-    <h1>Profile of {{ user.username }}</h1>
+<div class="profile-container">
+  <h1 class="profile-title">Profile of {{ user.username }}</h1>
 
-    {% if profile %}
+  {% if profile %}
+  <div class="profile-info">
     <div>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Phone:</strong> {{ profile.phone }}</p>
-        <p><strong>Address:</strong> {{ profile.address }}</p>
-        <p><strong>Favorite Brand:</strong> {{ profile.favorite_brand }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Phone:</strong> {{ profile.phone }}</p>
+    </div>
+    <div>
+      <p><strong>Address:</strong> {{ profile.address }}</p>
+      <p><strong>Favorite Brand:</strong> {{ profile.favorite_brand }}</p>
+    </div>
+      </div>
+  {% else %}
+  <p class="profile-empty">No profile data found.</p>
+  {% endif %}
+
+  <div class="profile-cars">
+    <h2 class="profile-cars-title">{{ user.username }}'s Cars</h2>
+
+    {% if cars %}
+    <div class="profile-car-grid">
+      {% for car in cars|slice:":3" %}
+      <a href="{% url 'car_detail' car.pk %}" class="profile-card-link">
+        <div class="profile-car-card">
+          {% if car.images.first %}
+          <img src="{{ car.images.first.image.url }}" alt="{{ car.model }}" class="profile-car-image">
+          {% endif %}
+          <h3 class="profile-car-brand">{{ car.brand }}</h3>
+          <p class="profile-car-price">${{ car.price }}</p>
+          <p class="profile-car-meta">{{ car.year }} | {{ car.new_or_used }}</p>
+          <p class="profile-car-meta">{{ car.category }} | {{ car.color }}</p>
+
+          {% if request.user == car.owner %}
+          <div class="profile-car-actions">
+            <a href="{% url 'edit_car' car.id %}" class="profile-edit-btn">Edit</a>
+            <form method="post" action="{% url 'delete_car' car.id %}">
+              {% csrf_token %}
+              <button type="submit" class="profile-delete-btn">Delete</button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
     </div>
     {% else %}
-    <p>No profile data found.</p>
+    <p class="profile-empty">No cars listed.</p>
     {% endif %}
-
-    <!-- User's Cars -->
-    <div>
-        <h2>{{ user.username }}'s Cars</h2>
-        {% if cars %}
-            <div>
-                {% for car in cars %}
-                <div>
-                    {% if car.image_set.first %}
-                        <img src="{{ car.image_set.first.image.url }}" alt="Car Image">
-                    {% endif %}
-                    <p><strong>Brand:</strong> {{ car.brand }}</p>
-                    <p><strong>Model:</strong> {{ car.model }}</p>
-                    <p><strong>Year:</strong> {{ car.year }}</p>
-
-                    <!-- Show edit/delete only if it's the logged-in user's own car -->
-                    {% if request.user == car.owner %}
-                        <a href="{% url 'edit_car' car.id %}"">Edit</a>
-                        <form method="post" action="{% url 'delete_car' car.id %}">
-                            {% csrf_token %}
-                            <button type="submit">Delete</button>
-                        </form>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p>No cars listed.</p>
-        {% endif %}
-    </div>
+  </div>
 </div>
 {% endblock %}

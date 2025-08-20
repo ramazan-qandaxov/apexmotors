@@ -1,25 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Register</h2>
+<div class="register-container">
+  <h2 class="register-title">Register</h2>
 
-  <form method="post">
+  <form method="post" class="register-form">
     {% csrf_token %}
-  
-    <h3>Account Info</h3>
-    {{ form.username.label_tag }} {{ form.username }}
-    {{ form.email.label_tag }} {{ form.email }}
-    {{ form.password1.label_tag }} {{ form.password1 }}
-    {{ form.password2.label_tag }} {{ form.password2 }}
-  
-    <h3>Profile Info</h3>
-    {{ form.phone.label_tag }} {{ form.phone }}
-    {{ form.address.label_tag }} {{ form.address }}
-    {{ form.favorite_brand.label_tag }} {{ form.favorite_brand }}
-  
-    <button type="submit">Register</button>
-  </form>
-  
 
-  <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    <h3 class="register-subheading">Account Info</h3>
+    <div class="register-field">
+      {{ form.username.label_tag }} {{ form.username }}
+    </div>
+    <div class="register-field">
+      {{ form.email.label_tag }} {{ form.email }}
+    </div>
+    <div class="register-field">
+      {{ form.password1.label_tag }} {{ form.password1 }}
+    </div>
+    <div class="register-field">
+      {{ form.password2.label_tag }} {{ form.password2 }}
+    </div>
+
+    <h3 class="register-subheading">Profile Info</h3>
+    <div class="register-field">
+      {{ form.phone.label_tag }} {{ form.phone }}
+    </div>
+    <div class="register-field">
+      {{ form.address.label_tag }} {{ form.address }}
+    </div>
+    <div class="register-field">
+      {{ form.favorite_brand.label_tag }} {{ form.favorite_brand }}
+    </div>
+
+    <button type="submit" class="register-btn">Register</button>
+  </form>
+
+  <p class="register-login-link">
+    Already have an account? <a href="{% url 'login' %}">Login here</a>
+  </p>
+</div>
 {% endblock %}

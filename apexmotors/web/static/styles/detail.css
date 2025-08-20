@@ -1,0 +1,318 @@
+.car-detail-container {
+  padding: 2rem;
+  max-width: 100rem;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #f0f0f0;
+  background-color: #121212;
+}
+
+.car-title {
+  font-size: 2.5rem;
+  margin-bottom: 5rem;
+  text-align: center;
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  max-height: 50rem;
+  margin-bottom: 3rem;
+  border-radius: 1rem;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-item img {
+  width: 100rem;
+  height: 60rem;
+  object-fit: contain;
+  border-radius: 1rem;
+  filter: brightness(0.9);
+  transition: transform 1.5s ease, filter 1.5s ease;
+}
+
+.carousel-item.active img {
+  transform: scale(1.02);
+  filter: brightness(1);
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  background: rgba(255,255,255,0.2);
+  color: #eee;
+  border: none;
+  padding: 1.2rem 1.6rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+
+.carousel-control:hover {
+  background: rgba(255,255,255,0.4);
+  color: #fff;
+}
+
+.carousel-control.prev {
+  left: 1.5rem;
+}
+
+.carousel-control.next {
+  right: 1.5rem;
+}
+
+.car-specs {
+  margin-top: 4rem;
+}
+
+.car-specs h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+  color: #ddd;
+}
+
+.specs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+
+.specs-grid > div {
+  flex: 1 1 25rem;
+  margin-left: 0;
+  background: #222;
+  padding: 1.5rem 2rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.2rem 0.6rem rgba(255,255,255,0.05);
+  color: #eee;
+}
+
+.manual-section {
+  margin-top: 3rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.manual-link {
+  color: #66aaff;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.manual-link:hover {
+  color: #99cfff;
+}
+
+.car-description {
+  line-height: 1.8;
+  color: #e0e0e0;
+  font-size: 1.6rem;
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 60rem;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.comments-section {
+  margin-top: 6rem;
+  background-color: #1a1a1a;
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1rem rgba(255,255,255,0.05);
+}
+
+.comment {
+  border-bottom: 1px solid #444;
+  padding: 2rem 0;
+  color: #f0f0f0;
+  font-size: 1.7rem;
+  line-height: 1.7;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+.comment-date {
+  font-size: 1.6rem;
+  color: #aaa;
+  margin-bottom: 1rem;
+  font-style: italic;
+  display: block;
+}
+
+
+.add-comment {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #222;
+  border-radius: 0.8rem;
+  color: #eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-comment h4 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f00101;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  flex-direction: column; 
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.form-group textarea,
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  padding: 0.7rem 1rem;
+  font-size: 1.6rem;
+  border-radius: 0.4rem;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: #eee;
+  resize: vertical;
+  height: 3rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group textarea:focus,
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+  outline: none;
+  border-color: #f00101;
+  background-color: #292929;
+}
+
+.error {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  color: #ff6b6b;
+}
+
+.form-group input[type="checkbox"] {
+  display: none;
+}
+
+.form-group label.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.2rem;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  background-color: #3a4d66;
+  color: #cceeff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-group input[type="checkbox"]:checked + label.checkbox-label {
+  background-color: #e70000;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 0 8px #ff666699;
+}
+
+button[type="submit"] {
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 1rem 2.5rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #ff4b33;
+}
+
+
+
+
+
+
+
+
+
+
+.hashtags input[type="checkbox"] {
+  display: none;
+}
+
+.hashtags label {
+  display: inline-block;
+  margin: 0.4rem;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  background-color: #d30505;
+  color: #cceeff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.hashtags label:hover {
+  background-color: #c53030;
+}
+
+.hashtags input[type="checkbox"]:checked + span {
+  background-color: #e70000;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 0 8px #ff666699;
+}

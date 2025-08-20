@@ -1,71 +1,125 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div>
+<div class="car-detail-container">
 
-    <!-- Car Title -->
-    <h2>{{ car.brand }} {{ car.model }}</h2>
+  <!-- Car Title -->
+  <h1 class="car-title">{{ car.brand }} {{ car.model }}</h1>
 
-    <!-- Characteristics Section -->
-    <div>
-        <h3>Characteristics</h3>
+  <!-- Image Carousel -->
+  <div class="carousel-container">
+    <div class="carousel-inner" id="carouselInner">
+      {% for image in car.images.all %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ image.image.url }}" alt="Car Image">
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if car.images.count > 1 %}
+    <button class="carousel-control prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="carousel-control next" onclick="moveSlide(1)">&#10095;</button>
+    {% endif %}
+  </div>
+
+  <!-- Specifications Section -->
+  <div class="car-specs">
+    <h2>Specifications</h2>
+    <div class="specs-grid">
+      <div>
         <p><strong>Brand:</strong> {{ car.brand }}</p>
         <p><strong>Model:</strong> {{ car.model }}</p>
         <p><strong>Category:</strong> {{ car.category }}</p>
         <p><strong>Price:</strong> ${{ car.price }}</p>
         <p><strong>Year:</strong> {{ car.year }}</p>
         <p><strong>Condition:</strong> {{ car.new_or_used }}</p>
+        <p><strong>Mileage:</strong> {{ car.mileage }} km</p>
+        <p><strong>Seller:</strong> {{ car.owner.username }}</p>
+      </div>
+      <div>
         <p><strong>Drive Train:</strong> {{ car.drive_train }}</p>
         <p><strong>Fuel Type:</strong> {{ car.fuel_type }}</p>
         <p><strong>Transmission:</strong> {{ car.transmission }}</p>
-        <p><strong>Mileage:</strong> {{ car.mileage }} km</p>
         <p><strong>Engine:</strong> {{ car.engine }} L</p>
         <p><strong>Top Speed:</strong> {{ car.top_speed }} km/h</p>
         <p><strong>Horsepower:</strong> {{ car.horsepower }} HP</p>
         <p><strong>Torque:</strong> {{ car.torque }} Nm</p>
         <p><strong>0-100 km/h:</strong> {{ car.acceleration }} sec</p>
-        <p><strong>Seller:</strong> {{ car.owner.username }}</p>
-        <p><strong>Description:</strong> {{ car.description }}</p>
+      </div>
     </div>
+  </div>
 
-    <!-- View Manual Link -->
-    <div>
-        <h3>Car Manual</h3>
-        <a href="?file={{ car.brand }}_{{ car.model }}_manual.pdf" target="_blank">View Manual</a>
-    </div>
+  <!-- Car Manual -->
+  {% if car.document %}
+  <div class="manual-section">
+    <h3>Car Manual</h3>
+    <a href="?manual={{ car.document.url }}" target="_blank" class="manual-link">View Manual (PDF)</a>
+  </div>
+  {% endif %}
 
-    <!-- Car Description -->
-    <div>
-        <h3>Description</h3>
-        <p>{{ car.description }}</p>
-    </div>
+  <!-- Car Description -->
+  <div class="car-description">
+    <h3>Description</h3>
+    <p>{{ car.description }}</p>
+  </div>
 
-    <!-- Comments Section -->
-    <div>
-        <h3>Comments</h3>
-        {% for comment in comments %}
-            <div>
-                <p><strong>{{ comment.user.username }}:</strong> {{ comment.text|safe }}</p>
-                <p>{{ comment.created_at }}</p>
+  <!-- Add Comment -->
+  {% if user.is_authenticated %}
+    <div class="add-comment">
+      <h4>Add a Comment</h4>
+      <form method="post">
+        {% csrf_token %}
+
+        <!-- Text field -->
+        <div class="form-group">
+          <label for="{{ form.text.id_for_label }}">Comment</label>
+          {{ form.text }}
+          {% if form.text.errors %}
+            <div class="error">
+              {{ form.text.errors }}
             </div>
-        {% empty %}
-            <p>No comments yet.</p>
-        {% endfor %}
-    </div>
-
-    <!-- Add Comment Form -->
-    {% if user.is_authenticated %}
-        <div>
-            <h4>Add a Comment</h4>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Post Comment</button>
-            </form>
+          {% endif %}
         </div>
-    {% else %}
-        <p>You must be <a href="{% url 'login' %}">logged in</a> to comment.</p>
-    {% endif %}
+
+        <!-- Hashtags field (checkboxes) -->
+
+        <div class="form-group">
+          <label>Hashtags</label>
+          {{ form.hashtags }}
+          {% if form.hashtags.errors %}
+            <div class="error">
+              {{ form.hashtags.errors }}
+            </div>
+          {% endif %}
+        </div>
+
+        <button type="submit">Post Comment</button>
+      </form>
+    </div>
+  {% else %}
+    <p>You must be <a href="{% url 'login' %}">logged in</a> to comment.</p>
+  {% endif %}
+
+<!-- Comments Section -->
+<div class="comments-section">
+  <h3>Comments</h3>
+  {% for comment in comments %}
+    <div class="comment">
+      <div class="comment-main">
+        <p><strong>{{ comment.user.username }}:</strong> {{ comment.text|safe }}</p>
+        {% for hashtag in comment.hashtags.all %}
+          <p class="comment-hashtag">#{{ hashtag.name }}</p>
+        {% empty %}
+          <p class="comment-hashtag">No hashtags</p>
+        {% endfor %}
+      </div>
+      <p class="comment-date">{{ comment.created_at }}</p>
+    </div>
+  {% empty %}
+    <p>No comments yet.</p>
+  {% endfor %}
+</div>
+
 
 </div>
 

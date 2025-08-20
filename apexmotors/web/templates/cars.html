@@ -2,59 +2,59 @@
 
 {% block content %}
 
-<form method="get" action="">
+<form method="get" action="" class="cars-search-form">
   <input 
     type="text" 
     name="q" 
     value="{{ request.GET.q }}" 
-    placeholder="Search by brand or category..." 
-    style="padding: 10px; width: 300px;" 
+    placeholder="Search by brand or category..."
+    class="cars-search-input"
+    style="height: 2rem;"
   />
-  <button type="submit">Search</button>
+  <button type="submit" class="cars-search-button">Search</button>
 </form>
 
-
 <section>
-  <h1>Catalog</h1>
+  <h1 class="cars-title">Catalog</h1>
 
-  <div>
+  <div class="cars-grid">
     {% for car in page_obj %}
-    <div>
-      <a href="{% url 'car_detail' car.id %}">
+    <div class="cars-card">
+      <a href="{% url 'car_detail' car.id %}" class="cars-card-link">
         <img
           src="{{ car.images.first.image.url }}"
           alt="{{ car.brand }}"
+          class="cars-card-image"
         />
-        <h3>{{ car.brand }}</h3>
-        <p>{{ car.category }} | {{ car.year }}</p>
+        <h3 class="cars-card-brand">{{ car.brand }} - {{ car.model }}</h3>
+        <p class="cars-card-meta">{{ car.category }} | {{ car.year }}</p>
       </a>
-      <p>${{ car.price }}</p>
-      <button>ADD TO CART</button>
+      <p class="cars-card-price">${{ car.price }}</p>
     </div>
     {% empty %}
-    <p>No cars available.</p>
+    <p class="cars-empty-msg">No cars available.</p>
     {% endfor %}
   </div>
 
-  <!-- Pagination -->
-  <div class="pagination" style="text-align:center; margin-top: 2rem;">
+  <div class="cars-pagination">
     {% if page_obj.has_previous %}
-      <a href="?page=1" class="page-number btn">First</a>
-      <a href="?page={{ page_obj.previous_page_number }}" class="page-number btn">Previous</a>
+      <a href="?page=1">First</a>
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
     {% endif %}
 
     {% for num in page_obj.paginator.page_range %}
       {% if page_obj.number == num %}
-        <span class="page-number current btn" style="background-color: #ff7961;">{{ num }}</span>
+        <span class="cars-page-current" style="color: white;">{{ num }}</span>
       {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
-        <a href="?page={{ num }}" class="page-number btn">{{ num }}</a>
+        <a href="?page={{ num }}">{{ num }}</a>
       {% endif %}
     {% endfor %}
 
     {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}" class="page-number btn">Next</a>
-      <a href="?page={{ page_obj.paginator.num_pages }}" class="page-number btn">Last</a>
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
   </div>
 </section>
+
 {% endblock %}
