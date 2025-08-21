@@ -21,6 +21,14 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # ---------------------------
+# INSTALL DEPENDENCIES
+# ---------------------------
+echo "Installing dependencies..."
+apt update
+apt install -y git docker.io docker-compose openssl
+systemctl enable --now docker
+
+# ---------------------------
 # CREATE APP USER
 # ---------------------------
 if ! id "$APP_USER" &>/dev/null; then
@@ -28,14 +36,6 @@ if ! id "$APP_USER" &>/dev/null; then
     useradd -m -s /bin/bash "$APP_USER"
 fi
 usermod -aG docker "$APP_USER"
-
-# ---------------------------
-# INSTALL DEPENDENCIES
-# ---------------------------
-echo "Installing dependencies..."
-apt update
-apt install -y git docker.io docker-compose openssl
-systemctl enable --now docker
 
 # ---------------------------
 # CLONE OR UPDATE REPO
