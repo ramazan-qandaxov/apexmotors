@@ -24,18 +24,18 @@ fi
 # INSTALL DEPENDENCIES
 # ---------------------------
 echo "Installing dependencies..."
-apt update
-apt install -y git docker.io docker-compose openssl
-systemctl enable --now docker
+apt update -qq >/dev/null
+apt install -y -qq git docker.io docker-compose openssl >/dev/null
+systemctl enable --now docker >/dev/null
 
 # ---------------------------
 # CREATE APP USER
 # ---------------------------
 if ! id "$APP_USER" &>/dev/null; then
     echo "Creating user $APP_USER..."
-    useradd -m -s /bin/bash "$APP_USER"
+    useradd -m -s /bin/bash "$APP_USER" >/dev/null
 fi
-usermod -aG docker "$APP_USER"
+usermod -aG docker "$APP_USER" >/dev/null
 
 # ---------------------------
 # CLONE OR UPDATE REPO
@@ -43,24 +43,24 @@ usermod -aG docker "$APP_USER"
 if [ ! -d "$APP_DIR/.git" ]; then
     echo "Cloning repository into $APP_DIR..."
     rm -rf "$APP_DIR"
-    git clone "$REPO_URL" "$APP_DIR"
+    git clone "$REPO_URL" "$APP_DIR" >/dev/null 2>&1
     chown -R "$APP_USER:$APP_USER" "$APP_DIR"
 else
     echo "Updating existing repository..."
     cd "$APP_DIR"
-    sudo -u "$APP_USER" git pull
+    sudo -u "$APP_USER" git pull >/dev/null 2>&1
 fi
 
 # ---------------------------
 # ASK FOR .env VARIABLES
 # ---------------------------
-read -p "Enter PostgreSQL database name [apexmotors]: " POSTGRES_DB
+read -p "Enter PostgreSQL database name leave blank for default [apexmotors]: " POSTGRES_DB
 POSTGRES_DB=${POSTGRES_DB:-apexmotors}
 
-read -p "Enter PostgreSQL username [apexmotors]: " POSTGRES_USER
+read -p "Enter PostgreSQL username leave blank for default [apexmotors]: " POSTGRES_USER
 POSTGRES_USER=${POSTGRES_USER:-apexmotors}
 
-read -s -p "Enter PostgreSQL password [veryverysecurepassword]: " POSTGRES_PASSWORD
+read -s -p "Enter PostgreSQL password leave blank for default [veryverysecurepassword]: " POSTGRES_PASSWORD
 echo
 POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-veryverysecurepassword}
 
@@ -85,7 +85,7 @@ if [ ! -d "$CERT_DIR" ]; then
         -subj "/CN=$DOMAIN" \
         -newkey rsa:2048 \
         -keyout "$CERT_DIR/server.key" \
-        -out "$CERT_DIR/server.crt"
+        -out "$CERT_DIR/server.crt" >/dev/null 2>&1
     chown -R "$APP_USER:$APP_USER" "$CERT_DIR"
 fi
 
@@ -115,21 +115,21 @@ EOF
 # ---------------------------
 # ENABLE AND START SERVICE
 # ---------------------------
-systemctl daemon-reload
-systemctl enable "$SERVICE_NAME"
-systemctl restart "$SERVICE_NAME"
+systemctl daemon-reload >/dev/null
+systemctl enable "$SERVICE_NAME" >/dev/null
+systemctl restart "$SERVICE_NAME" >/dev/null
 
 # ---------------------------
 # WAIT FOR WEB CONTAINER TO BE READY
 # ---------------------------
 echo "Waiting for web container to start..."
-sleep 10  # simple wait; can increase if app takes longer
+sleep 10
 
 # ---------------------------
 # CREATE DJANGO SUPERUSER
 # ---------------------------
 echo "Creating Django superuser..."
-docker-compose -f "$APP_DIR/docker-compose.yml" exec -T web python manage.py shell <<EOF
+docker-compose -f "$APP_DIR/docker-compose.yml" exec -T web python manage.py shell >/dev/null 2>&1 <<EOF
 from django.contrib.auth import get_user_model
 User = get_user_model()
 if not User.objects.filter(username='superuser').exists():
