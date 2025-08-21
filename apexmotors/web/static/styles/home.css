@@ -113,7 +113,7 @@
     color: #fff;
     margin-top: 2rem;
     border-radius: 12px; /* smooth rounded corners */
-    box-shadow: 0 15px 40px rgba(224, 0, 0, 0.6); /* soft shadow */
+    box-shadow: 0 15px 40px rgba(170, 170, 170, 0.6); /* soft shadow */
     overflow: hidden; /* ensures shadow and rounded corners work together */
 }
 
