@@ -20,3 +20,11 @@ Run the following command as root:
 
 ```bash
 sudo bash -c "$(curl -sSL https://raw.githubusercontent.com/ramazan-qandaxov/apexmotors/main/install.sh)"
+
+```
+
+---
+
+## Important Note
+
+The webpage is not populated so you will need to populate it manually.
