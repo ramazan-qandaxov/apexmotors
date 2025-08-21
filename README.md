@@ -10,7 +10,6 @@ The script will:
 - Prompt for `.env` PostgreSQL credentials (with defaults)  
 - Generate self-signed SSL certificates in `/etc/ssl/apexmotors`  
 - Set up Docker Compose as a systemd service (`docker-compose-app`)  
-- Import `db.sql` automatically from the repository root  
 - Configure Nginx to serve the app over HTTPS  
 
 ---
