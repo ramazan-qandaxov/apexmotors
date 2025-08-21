@@ -27,5 +27,4 @@ sudo bash -c "$(curl -sSL https://raw.githubusercontent.com/ramazan-qandaxov/ape
 
 ## Important Note
 
-The webpage is not populated so you will need to populate it manually. 
-You can do it from /admin with credentials ```superuser : superpassword```
+The webpage is not populated so you will need to do it manually from /admin using credentials ```superuser : superpassword```.
