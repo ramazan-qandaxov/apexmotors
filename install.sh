@@ -119,6 +119,24 @@ systemctl daemon-reload
 systemctl enable "$SERVICE_NAME"
 systemctl restart "$SERVICE_NAME"
 
+# ---------------------------
+# WAIT FOR WEB CONTAINER TO BE READY
+# ---------------------------
+echo "Waiting for web container to start..."
+sleep 10  # simple wait; can increase if app takes longer
+
+# ---------------------------
+# CREATE DJANGO SUPERUSER
+# ---------------------------
+echo "Creating Django superuser..."
+docker-compose -f "$APP_DIR/docker-compose.yml" exec -T web python manage.py shell <<EOF
+from django.contrib.auth import get_user_model
+User = get_user_model()
+if not User.objects.filter(username='superuser').exists():
+    User.objects.create_superuser('superuser', 'admin@example.com', 'superpassword')
+EOF
+echo "Django superuser created: username=superuser, password=superpassword"
+
 echo "Installation complete!"
 echo "Service: $SERVICE_NAME"
 echo "SSL certificates: $CERT_DIR"
