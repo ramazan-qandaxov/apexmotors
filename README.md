@@ -25,6 +25,8 @@ sudo bash -c "$(curl -sSL https://raw.githubusercontent.com/ramazan-qandaxov/ape
 
 ---
 
-## Important Note
+## Important Notes
+
+You need to add ip adress of machine to hosts file as ```<ip_address> apexmotors.com www.apexmotors.com```
 
 The webpage is not populated so you will need to do it manually from /admin using credentials ```superuser : superpassword```.

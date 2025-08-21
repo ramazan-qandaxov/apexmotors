@@ -24,29 +24,29 @@ fi
 # INSTALL DEPENDENCIES
 # ---------------------------
 echo "Installing dependencies..."
-apt update -qq >/dev/null
-apt install -y -qq git docker.io docker-compose openssl >/dev/null
-systemctl enable --now docker >/dev/null
+apt update -qq >/dev/null 2>&1
+apt install -y -qq git docker.io docker-compose openssl >/dev/null 2>&1
+systemctl enable --now docker >/dev/null 2>&1
 
 # ---------------------------
 # CREATE APP USER
 # ---------------------------
 if ! id "$APP_USER" &>/dev/null; then
     echo "Creating user $APP_USER..."
-    useradd -m -s /bin/bash "$APP_USER" >/dev/null
+    useradd -m -s /bin/bash "$APP_USER" >/dev/null 2>&1
 fi
-usermod -aG docker "$APP_USER" >/dev/null
+usermod -aG docker "$APP_USER" >/dev/null 2>&1
 
 # ---------------------------
 # CLONE OR UPDATE REPO
 # ---------------------------
 if [ ! -d "$APP_DIR/.git" ]; then
-    echo "Cloning repository into $APP_DIR..."
+    echo "Cloning repository..."
     rm -rf "$APP_DIR"
     git clone "$REPO_URL" "$APP_DIR" >/dev/null 2>&1
     chown -R "$APP_USER:$APP_USER" "$APP_DIR"
 else
-    echo "Updating existing repository..."
+    echo "Updating repository..."
     cd "$APP_DIR"
     sudo -u "$APP_USER" git pull >/dev/null 2>&1
 fi
@@ -54,13 +54,13 @@ fi
 # ---------------------------
 # ASK FOR .env VARIABLES
 # ---------------------------
-read -p "Enter PostgreSQL database name leave blank for default [apexmotors]: " POSTGRES_DB
+read -p "Enter PostgreSQL database name [apexmotors]: " POSTGRES_DB
 POSTGRES_DB=${POSTGRES_DB:-apexmotors}
 
-read -p "Enter PostgreSQL username leave blank for default [apexmotors]: " POSTGRES_USER
+read -p "Enter PostgreSQL username [apexmotors]: " POSTGRES_USER
 POSTGRES_USER=${POSTGRES_USER:-apexmotors}
 
-read -s -p "Enter PostgreSQL password leave blank for default [veryverysecurepassword]: " POSTGRES_PASSWORD
+read -s -p "Enter PostgreSQL password [veryverysecurepassword]: " POSTGRES_PASSWORD
 echo
 POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-veryverysecurepassword}
 
@@ -79,7 +79,7 @@ chown "$APP_USER:$APP_USER" "$ENV_FILE"
 # CREATE SSL CERTIFICATES
 # ---------------------------
 if [ ! -d "$CERT_DIR" ]; then
-    echo "Creating self-signed SSL certificates..."
+    echo "Generating self-signed SSL certificates..."
     mkdir -p "$CERT_DIR"
     openssl req -x509 -nodes -days 365 \
         -subj "/CN=$DOMAIN" \
@@ -115,12 +115,12 @@ EOF
 # ---------------------------
 # ENABLE AND START SERVICE
 # ---------------------------
-systemctl daemon-reload >/dev/null
-systemctl enable "$SERVICE_NAME" >/dev/null
-systemctl restart "$SERVICE_NAME" >/dev/null
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable "$SERVICE_NAME" >/dev/null 2>&1
+systemctl restart "$SERVICE_NAME" >/dev/null 2>&1
 
 # ---------------------------
-# WAIT FOR WEB CONTAINER TO BE READY
+# WAIT FOR WEB CONTAINER
 # ---------------------------
 echo "Waiting for web container to start..."
 sleep 10
@@ -137,7 +137,7 @@ if not User.objects.filter(username='superuser').exists():
 EOF
 echo "Django superuser created: username=superuser, password=superpassword"
 
-echo "Installation complete!"
+echo "Installation complete"
 echo "Service: $SERVICE_NAME"
 echo "SSL certificates: $CERT_DIR"
 echo "App directory: $APP_DIR"
