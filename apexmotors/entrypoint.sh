@@ -16,10 +16,8 @@ python manage.py migrate --noinput
 
 # Collect static files
 echo "Collecting static files..."
-python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput --clear
 
 # Start Gunicorn server
 echo "Starting Gunicorn..."
-#exec python manage.py runserver 0.0.0.0:8000
-# Change to gunicorn 
 exec gunicorn apexmotors.wsgi:application --bind 0.0.0.0:8000
