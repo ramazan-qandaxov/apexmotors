@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
-<div class="about-container">
+<div class="about-container" id="top">
   <h2 class="about-title">About Apex Motors</h2>
 
   <p>
-    Founded in 2025, <strong>ApexMotors</strong> is a premier online marketplace dedicated to sports car enthusiasts.
+    Founded in 2025, <strong>Apex Motors</strong> is a premier online marketplace dedicated to sports car enthusiasts.
     Whether you're looking to buy your dream ride or sell your performance machine, we're here to
     connect passionate drivers with premium vehicles.
   </p>
@@ -16,8 +17,50 @@
   </p>
 
   <p>
-    We’re built by car lovers, for car lovers — welcome to the ApexMotors experience.
+    We’re built by car lovers, for car lovers — welcome to the Apex Motors experience.
   </p>
+
+  <div class="mission-section">
+    <h3>Our Mission</h3>
+    <p>
+      To provide a trusted, cutting-edge platform that empowers car enthusiasts worldwide to discover,
+      buy, and sell high-performance vehicles with confidence.
+    </p>
+  </div>
+
+  <div class="values-section">
+    <h3>Core Values</h3>
+    <ul>
+      <li>Passion for Performance</li>
+      <li>Integrity & Trust</li>
+      <li>Innovation & Technology</li>
+      <li>Community & Connection</li>
+    </ul>
+  </div>
+
+  <div class="team-section">
+    <h3>Meet the Team</h3>
+    <p>
+      A diverse group of automotive experts, developers, and enthusiasts united by a love of cars and innovation.
+    </p>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="{% static 'img/team1.png' %}" alt="Team Member 1">
+        <p class="name">Alex R.</p>
+        <p class="role">Founder & CEO</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static 'img/team2.png' %}" alt="Team Member 2">
+        <p class="name">Maya L.</p>
+        <p class="role">CTO</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static 'img/team3.png' %}" alt="Team Member 3">
+        <p class="name">Jordan S.</p>
+        <p class="role">Lead Designer</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Optional: Back to Top -->
   <div class="back-to-top">

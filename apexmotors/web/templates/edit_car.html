@@ -5,145 +5,69 @@
     <h1>Welcome, {{ user.username }}</h1>
     <p>Edit your car details.</p>
 
-    <!-- Edit Car Form -->
     <div class="edit-car-form">
         <h2>Edit Car</h2>
         <form method="post" enctype="multipart/form-data">
-            <div class="form-area">
-              {% csrf_token %}
-          
-              <div class="form-group">
-                {{ form.brand.label_tag }}
-                {{ form.brand }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.model.label_tag }}
-                {{ form.model }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.description.label_tag }}
-                {{ form.description }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.price.label_tag }}
-                {{ form.price }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.category.label_tag }}
-                {{ form.category }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.new_or_used.label_tag }}
-                {{ form.new_or_used }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.year.label_tag }}
-                {{ form.year }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.mileage.label_tag }}
-                {{ form.mileage }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.color.label_tag }}
-                {{ form.color }}
-              </div>
-          
-              <!-- Available Colors -->
-              <div class="form-group">
-                <label for="id_available_colors">Available Colors:</label>
-                <div class="edit-car-color-options">
-                  {% for checkbox in form.available_colors %}
-                    <label class="edit-car-color-option">
-                      {{ checkbox.tag }}
-                      <span class="edit-car-color-circle" style="background-color: {{ checkbox.choice_label|lower }}"></span>
-                      {{ checkbox.choice_label }}
-                    </label>
-                  {% endfor %}
+            {% csrf_token %}
+
+            {{ form.brand.label_tag }} {{ form.brand }}
+            {{ form.model.label_tag }} {{ form.model }}
+            {{ form.description.label_tag }} {{ form.description }}
+            {{ form.price.label_tag }} {{ form.price }}
+            {{ form.category.label_tag }} {{ form.category }}
+            {{ form.new_or_used.label_tag }} {{ form.new_or_used }}
+            {{ form.year.label_tag }} {{ form.year }}
+            {{ form.mileage.label_tag }} {{ form.mileage }}
+            {{ form.color.label_tag }} {{ form.color }}
+
+            <!-- Available Colors -->
+            <label for="id_available_colors">Available Colors:</label>
+            <div class="color-options-container">
+                <div class="color-options">
+                    {% for checkbox in form.available_colors %}
+                        <label class="color-option">
+                            {{ checkbox.tag }}
+                            <span class="color-circle" style="background-color: {{ checkbox.choice_label|lower }}"></span>
+                            {{ checkbox.choice_label }}
+                        </label>
+                    {% endfor %}
                 </div>
-              </div>
-          
-              <div class="form-group">
-                {{ form.engine.label_tag }}
-                {{ form.engine }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.fuel_type.label_tag }}
-                {{ form.fuel_type }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.drivetrain.label_tag }}
-                {{ form.drivetrain }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.horsepower.label_tag }}
-                {{ form.horsepower }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.torque.label_tag }}
-                {{ form.torque }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.transmission.label_tag }}
-                {{ form.transmission }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.top_speed.label_tag }}
-                {{ form.top_speed }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.acceleration.label_tag }}
-                {{ form.acceleration }}
-              </div>
-          
-              <div class="form-group">
-                {{ form.document.label_tag }}
-                {{ form.document }}
-              </div>
-          
-              <!-- Image Upload -->
-              <div class="form-group">
-                <label for="id_image">Add More Images:</label>
-                <input type="file" name="image" id="id_image" multiple>
-              </div>
-          
-              <!-- Existing Images -->
-              <div class="edit-car>
-                <h3 style="margin-top: 20px;">Existing Images:</h3>
-                <div class="edit-car-existing-images">
-                  {% for image in car.images.all %}
-                    <div class="edit-car-image-box">
-                      <img src="{{ image.image.url }}" alt="Car Image">
-                      <label>
-                        <input type="checkbox" name="delete_images" value="{{ image.id }}">
-                        Delete
-                      </label>
-                    </div>
-                  {% empty %}
-                    <p>No images uploaded yet.</p>
-                  {% endfor %}
-                </div>
-              </div>
-          
-              <button type="submit">Save Changes</button>
             </div>
-          </form>
-          
+
+            {{ form.engine.label_tag }} {{ form.engine }}
+            {{ form.fuel_type.label_tag }} {{ form.fuel_type }}
+            {{ form.drivetrain.label_tag }} {{ form.drivetrain }}
+            {{ form.horsepower.label_tag }} {{ form.horsepower }}
+            {{ form.torque.label_tag }} {{ form.torque }}
+            {{ form.transmission.label_tag }} {{ form.transmission }}
+            {{ form.top_speed.label_tag }} {{ form.top_speed }}
+            {{ form.acceleration.label_tag }} {{ form.acceleration }}
+            {{ form.document.label_tag }} {{ form.document }}
+
+            <!-- Upload New Images -->
+            <label for="id_image">Add More Images:</label>
+            <input type="file" name="image" id="id_image" multiple>
+
+            <!-- Existing Images -->
+            <div class="edit-car-existing-section">
+                <h3>Existing Images:</h3>
+                <div class="edit-car-existing-images">
+                    {% for image in car.images.all %}
+                        <div class="edit-car-image-box">
+                            <img src="{{ image.image.url }}" alt="Car Image">
+                            <label class="delete-checkbox">
+                                <input type="checkbox" name="delete_images" value="{{ image.id }}">
+                                Delete
+                            </label>
+                        </div>
+                    {% empty %}
+                        <p>No images uploaded yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <button type="submit">Save Changes</button>
+        </form>
     </div>
 </div>
 {% endblock %}

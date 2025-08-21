@@ -4,15 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class CommentForm(forms.ModelForm):
-    hashtags = forms.ModelMultipleChoiceField(
-        queryset=Hashtag.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=False
-    )
 
     class Meta:
         model = Comment
-        fields = ['text', 'hashtags']
+        fields = ['text']
 
 class CarForm(forms.ModelForm):
     class Meta:

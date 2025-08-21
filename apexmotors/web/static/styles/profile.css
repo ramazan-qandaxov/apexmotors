@@ -1,160 +1,213 @@
+/* ===== PROFILE HEADER ===== */
 .profile-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-top: 2rem;
-    color: #f44336;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+  text-align: center;
+  font-size: 2.8rem;
+  margin-top: 2rem;
+  color: #f44336;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+.profile-title::after {
+  content: "";
+  display: block;
+  margin: 1rem auto 0;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #f44336, transparent);
+  border-radius: 2px;
+}
 
-  .profile-info {
-    width: 70rem;
-    margin: 2rem auto;
-    padding: 2rem 3rem;
-    background-color: #221f1f;
-    border: 1px solid #333;
-    border-radius: 10px;
-    color: #f0e3e3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    gap: 4rem;
-    position: relative;
+/* ===== PROFILE INFO CARD ===== */
+.profile-info {
+  width: 70rem;
+  margin: 2rem auto;
+  padding: 2rem 3rem;
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #333;
+  border-radius: 14px;
+  color: #f0e3e3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  gap: 4rem;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+.profile-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(244, 67, 54, 0.4);
 }
 
 .profile-info > div {
-    flex: 1;
-    text-align: center;
-    position: relative;
+  flex: 1;
+  text-align: center;
+  position: relative;
 }
-
 .profile-info > div:first-child::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 100%; 
-    background-color: #555;
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 100%;
+  background-color: #555;
 }
 
-.profile-info > div:last-child {
-    text-align: center;
+/* ===== EMPTY MESSAGE ===== */
+.profile-empty {
+  text-align: center;
+  color: #888;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-style: italic;
 }
 
+/* ===== USER CARS SECTION ===== */
+.profile-cars-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin: 3rem 0 1.5rem;
+  color: #f44336;
+  position: relative;
+}
+.profile-cars-title::after {
+  content: "";
+  display: block;
+  margin: 0.8rem auto 0;
+  width: 60px;
+  height: 3px;
+  background: #f44336;
+  border-radius: 2px;
+}
 
-  
-  .profile-empty {
-    text-align: center;
-    color: #888;
-    margin-top: 2rem;
-    font-size: 3rem;
+/* ===== CAR CARDS ===== */
+.profile-car-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem auto 3rem;
+  flex-wrap: wrap;
+}
+.profile-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+.profile-car-card {
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #333;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.6rem;
+  width: 28rem;
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.4s ease, border 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.profile-car-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(244,67,54,0.12) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.profile-car-card:hover::before {
+  opacity: 1;
+}
+.profile-car-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(244, 67, 54, 0.3);
+  border: 1px solid #f44336;
+}
+
+/* CAR IMAGE */
+.profile-car-card img {
+  width: 100%;
+  height: 22rem;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: transform 0.4s ease;
+}
+.profile-car-card:hover img {
+  transform: scale(1.05);
+}
+
+/* CAR TEXT */
+.profile-car-brand {
+  color: #fff;
+  font-size: 1.6rem;
+  margin: 0.4rem 0;
+  font-weight: 600;
+}
+.profile-car-price {
+  color: #f44336;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.profile-car-meta {
+  color: #bbb;
+  font-size: 1.3rem;
+}
+
+/* ===== CAR ACTION BUTTONS ===== */
+.profile-car-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.profile-car-actions .profile-edit-btn,
+.profile-car-actions .profile-delete-btn {
+  color: white;
+  border: none;
+  padding: 0.7rem 2.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1.4rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+.profile-car-actions .profile-edit-btn {
+  background-color: #fc7100cc;
+}
+.profile-car-actions .profile-delete-btn {
+  background-color: #f44336be;
+}
+.profile-car-actions .profile-edit-btn:hover {
+  background-color: #ff8a3d;
+  box-shadow: 0 5px 15px rgba(252,113,0,0.5);
+  color: white;
+}
+.profile-car-actions .profile-delete-btn:hover {
+  background-color: #f35e53;
+  box-shadow: 0 5px 15px rgba(243,94,83,0.5);
+}
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 768px) {
+  .profile-info {
+    flex-direction: column;
+    width: 90%;
+    gap: 2rem;
   }
-  
-  .profile-cars-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 3rem;
-    color: #f44336;
+  .profile-info > div:first-child::after {
+    display: none;
   }
-  
-  .profile-car-grid {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem auto;
-    flex-wrap: wrap;
-  }
-  
-  .profile-card-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  
   .profile-car-card {
-    background-color: #1a1a1a;
-    border: 1px solid #333;
-    padding: 2rem;
-    text-align: center;
-    font-size: 1.6rem;
-    width: 28rem;
-    height: 100%;
-    border-radius: 1rem;
+    width: 90%;
   }
-  
-  .profile-car-card:hover {
-    background-color: #3534348c;
-  }
-  
-
   .profile-car-card img {
-    width: 28rem;
-    height: 25rem;
-    object-fit: cover;
-    margin-bottom: 1rem;
+    height: 18rem;
   }
-  
-  .profile-car-brand {
-    color: #fff;
-    font-size: 1.6rem;
-    /* margin: 0.5rem 0; */
-  }
-  
-  .profile-car-price {
-    color: #f44336;
-    font-weight: bold;
-  }
-  
-  .profile-car-meta {
-    color: #bbb;
-  }
-  
-  .profile-car-actions {
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    width: 100%;
-  }
-  
-  .profile-car-actions .profile-edit-btn,
-  .profile-delete-btn {
-    color: white;
-    border: none;
-    padding: 0.8rem 2.9rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: 600;
-    font-size: 1.6rem;
-  }
-  
-  .profile-car-actions .profile-edit-btn {
-    background-color: #fc7100cc;
-  }
-  
-  .profile-car-actions .profile-delete-btn {
-    background-color: #f44336be;
-  }
-  
-  .profile-car-actions .profile-edit-btn:hover{
-    background-color: #f78a31cc;
-    color: white;
-  }
-
-  .profile-car-actions .profile-delete-btn:hover {
-  background-color: #f35e53be;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .profile-car-card {
-      width: 20rem;
-    }  
-  
-    .profile-car-card img {
-      width: 18rem;
-    }    
-  }
+}

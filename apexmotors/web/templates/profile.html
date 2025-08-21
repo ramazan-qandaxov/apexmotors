@@ -13,7 +13,7 @@
       <p><strong>Address:</strong> {{ profile.address }}</p>
       <p><strong>Favorite Brand:</strong> {{ profile.favorite_brand }}</p>
     </div>
-      </div>
+  </div>
   {% else %}
   <p class="profile-empty">No profile data found.</p>
   {% endif %}
@@ -24,8 +24,9 @@
     {% if cars %}
     <div class="profile-car-grid">
       {% for car in cars|slice:":3" %}
-      <a href="{% url 'car_detail' car.pk %}" class="profile-card-link">
-        <div class="profile-car-card">
+      <div class="profile-car-card">
+        <!-- Car details wrapped in link -->
+        <a href="{% url 'car_detail' car.pk %}" class="profile-card-link">
           {% if car.images.first %}
           <img src="{{ car.images.first.image.url }}" alt="{{ car.model }}" class="profile-car-image">
           {% endif %}
@@ -33,18 +34,19 @@
           <p class="profile-car-price">${{ car.price }}</p>
           <p class="profile-car-meta">{{ car.year }} | {{ car.new_or_used }}</p>
           <p class="profile-car-meta">{{ car.category }} | {{ car.color }}</p>
+        </a>
 
-          {% if request.user == car.owner %}
-          <div class="profile-car-actions">
-            <a href="{% url 'edit_car' car.id %}" class="profile-edit-btn">Edit</a>
-            <form method="post" action="{% url 'delete_car' car.id %}">
-              {% csrf_token %}
-              <button type="submit" class="profile-delete-btn">Delete</button>
-            </form>
-          </div>
-          {% endif %}
-        </div>
-      </a>
+        <!-- Actions OUTSIDE the link so buttons are clickable -->
+        {% if request.user == car.owner %}
+        <div class="profile-car-actions" style="position: relative; z-index: 2;">
+          <a href="{% url 'edit_car' car.id %}" class="profile-edit-btn">Edit</a>
+          <form method="post" action="{% url 'delete_car' car.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="profile-delete-btn">Delete</button>
+          </form>
+        </div>        
+        {% endif %}
+      </div>
       {% endfor %}
     </div>
     {% else %}

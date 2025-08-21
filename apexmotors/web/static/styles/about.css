@@ -1,49 +1,138 @@
 .about-container {
-    max-width: 100rem;
-    margin: 50px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    color: #ffffff;
-    line-height: 1.8;
-    background-color: #291b1b;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  }
-  
-  .about-title {
-    font-size: 5rem;
-    text-align: center;
-    margin-bottom: 30px;
-    color: #ffffff;
-  }
-  
-  .about-container p {
-    margin-bottom: 20px;
-    font-size: 2.3rem;
-    text-align: center;
-  }
-  
-  /* Optional hover effect on strong text */
-  .about-container strong:hover {
-    color: #e74c3c;
-    transition: color 0.3s ease;
-  }
-  
-  /* Optional: Back to Top link */
-  .back-to-top {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 2rem;
-  }
-  
-  .back-to-top a {
-    text-decoration: none;
-    color: #3498db;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .back-to-top a:hover {
-    color: #2c3e50;
-  }
-  
+  max-width: 100rem;
+  margin: 50px auto;
+  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f0f0f0;
+  line-height: 1.8;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  border-radius: 1.2rem;
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.about-title {
+  font-size: 5rem;
+  margin-bottom: 3rem;
+  color: #ff4b33;
+  text-shadow: 0 0.3rem 0.6rem rgba(255, 75, 51, 0.5);
+}
+
+.about-container p {
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+.about-container strong:hover {
+  color: #ff6b61;
+  transition: color 0.3s ease;
+}
+
+/* Sections */
+.mission-section, .values-section, .team-section {
+  margin-top: 4rem;
+  padding: 2rem;
+  background: linear-gradient(145deg, #222222, #1c1c1c);
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(255, 75, 51, 0.15);
+}
+
+.mission-section h3,
+.values-section h3,
+.team-section h3 {
+  font-size: 3rem;
+  color: #ff6b61;
+  margin-bottom: 2rem;
+  text-shadow: 0 0.1rem 0.2rem rgba(255,107,97,0.4);
+}
+
+.values-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.values-section li {
+  font-size: 1.9rem;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.values-section li::before {
+  position: absolute;
+  left: 0;
+  font-size: 2rem;
+}
+
+/* Team Grid */
+.team-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.team-member {
+  background: linear-gradient(145deg, #1c1c1c, #222222);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 20rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 0.6rem 1.5rem rgba(255,75,51,0.35);
+}
+
+.team-member img {
+  width: 100%;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  filter: brightness(0.9);
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.team-member img:hover {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
+
+.team-member .name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #ff4b33;
+}
+
+.team-member .role {
+  font-size: 1.6rem;
+  color: #aaa;
+}
+
+/* Back to Top */
+.back-to-top {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 2rem;
+}
+
+.back-to-top a {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.back-to-top a:hover {
+  color: #ff4b33;
+  transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(2rem); }
+  to { opacity: 1; transform: translateY(0); }
+}

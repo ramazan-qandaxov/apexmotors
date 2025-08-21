@@ -10,6 +10,8 @@
 
 html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
+    zoom: 1.2;
 }
 
 body{
@@ -47,26 +49,15 @@ body{
     color: white;
     border: none;
     padding: 1.2rem 2rem;
-    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: 600;
-    font-size: 1.6rem;
-}
+    font-size: 1.1rem;
+    border-radius: 10px;
+  }
 
 .apex-base button:hover {
     background-color: var(--accent-red);
-}
-
-.apex-base input,
-.apex-base textarea,
-.apex-base select {
-    background-color: #1e1e1e;
-    color: var(--text-light);
-    padding: 1rem;
-    border-radius: 4px;
-    margin: 0.5rem 0;
-    height: 4rem;
 }
 
 .apex-base input:focus,

@@ -5,7 +5,6 @@
     <h1>Welcome, {{ user.username }}</h1>
     <p>Add cars for selling.</p>
 
-    <!-- Add Car Form -->
     <div class="add-car-form">
         <h2>Add a New Car</h2>
         <form method="post" enctype="multipart/form-data">
@@ -23,14 +22,16 @@
 
             <!-- Available Colors -->
             <label for="id_available_colors">Available Colors:</label>
-            <div class="color-options">
-                {% for checkbox in form.available_colors %}
-                    <label class="color-option">
-                        {{ checkbox.tag }}
-                        <span class="color-circle" style="background-color: {{ checkbox.choice_label|lower }}"></span>
-                        {{ checkbox.choice_label }}
-                    </label>
-                {% endfor %}
+            <div class="color-options-container">
+                <div class="color-options">
+                    {% for checkbox in form.available_colors %}
+                        <label class="color-option">
+                            {{ checkbox.tag }}
+                            <span class="color-circle" style="background-color: {{ checkbox.choice_label|lower }}"></span>
+                            {{ checkbox.choice_label }}
+                        </label>
+                    {% endfor %}
+                </div>
             </div>
 
             {{ form.engine.label_tag }} {{ form.engine }}

@@ -1,26 +1,36 @@
+/* Container */
 .car-detail-container {
   padding: 2rem;
   max-width: 100rem;
   margin: 0 auto;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #f0f0f0;
-  background-color: #121212;
+  background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
 }
 
+/* Title */
 .car-title {
-  font-size: 2.5rem;
-  margin-bottom: 5rem;
+  font-size: 3rem;
+  margin-bottom: 4rem;
   text-align: center;
   font-weight: 700;
-  color: #e0e0e0;
+  color: #ff4b33;
+  text-shadow: 0 0.2rem 0.4rem rgba(255, 75, 51, 0.6);
 }
 
+/* Modern Carousel */
 .carousel-container {
   position: relative;
   overflow: hidden;
-  max-height: 50rem;
+  max-height: 55rem;
   margin-bottom: 3rem;
-  border-radius: 1rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.carousel-container:hover {
+  transform: scale(1.01);
 }
 
 .carousel-inner {
@@ -31,13 +41,17 @@
 
 .carousel-item {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 1.5s ease, visibility 1.5s ease;
+  transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
+  transform: scale(0.98);
+  filter: brightness(0.8);
+  border-radius: 1rem;
 }
 
 .carousel-item.active {
@@ -46,41 +60,60 @@
   pointer-events: auto;
   position: relative;
   z-index: 1;
+  transform: scale(1);
+  filter: brightness(1);
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.5);
 }
 
 .carousel-item img {
-  width: 100rem;
+  width: 100%;
   height: 60rem;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 1rem;
-  filter: brightness(0.9);
-  transition: transform 1.5s ease, filter 1.5s ease;
+  filter: brightness(0.85);
+  transition: transform 1.5s ease, filter 1.5s ease, box-shadow 1.2s ease;
 }
 
-.carousel-item.active img {
-  transform: scale(1.02);
-  filter: brightness(1);
+.carousel-item:hover img {
+  transform: scale(1.03);
+  box-shadow: 0 1rem 2rem rgba(255, 255, 255, 0.1);
 }
 
+/* Gradient overlay on carousel images */
+.carousel-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to top, rgba(18, 18, 18, 0.8), transparent);
+  border-radius: 1rem;
+  pointer-events: none;
+}
+
+/* Carousel Controls */
 .carousel-control {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2.5rem;
-  background: rgba(255,255,255,0.2);
-  color: #eee;
+  font-size: 3rem;
+  background: rgba(255, 75, 51, 0.2);
+  color: #fff;
   border: none;
-  padding: 1.2rem 1.6rem;
+  padding: 1rem 1.5rem;
   cursor: pointer;
   z-index: 10;
   border-radius: 50%;
-  transition: background 0.3s ease;
+  transition: all 0.4s ease;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
 }
 
-
 .carousel-control:hover {
-  background: rgba(255,255,255,0.4);
-  color: #fff;
+  background: rgba(255, 75, 51, 0.5);
+  transform: translateY(-50%) scale(1.1);
+  color: #ff4b33;
 }
 
 .carousel-control.prev {
@@ -91,36 +124,72 @@
   right: 1.5rem;
 }
 
+/* Carousel Dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.carousel-dots button {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dots button.active {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #ff4b33;
+  box-shadow: 0 0 8px rgba(255, 75, 51, 0.7);
+}
+
+/* Car Specs */
 .car-specs {
   margin-top: 4rem;
 }
 
 .car-specs h2 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 2.5rem;
-  font-weight: 600;
-  color: #ddd;
+  font-weight: 700;
+  color: #ff6b61;
+  text-shadow: 0 0.1rem 0.2rem rgba(255,107,97,0.5);
 }
 
 .specs-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 4rem;
+  gap: 3rem;
   justify-content: space-between;
   margin-bottom: 4rem;
 }
 
 .specs-grid > div {
   flex: 1 1 25rem;
-  margin-left: 0;
-  background: #222;
-  padding: 1.5rem 2rem;
-  border-radius: 0.8rem;
-  box-shadow: 0 0.2rem 0.6rem rgba(255,255,255,0.05);
-  color: #eee;
+  background: linear-gradient(145deg, #1c1c1c, #222222);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1rem rgba(255,75,51,0.15);
+  color: #f5f5f5;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.specs-grid > div:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 0.6rem 1.5rem rgba(255,75,51,0.35);
+}
+
+/* Manual Section */
 .manual-section {
   margin-top: 3rem;
   text-align: center;
@@ -128,38 +197,42 @@
 }
 
 .manual-link {
-  color: #66aaff;
-  text-decoration: underline;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  color: #ff6b61;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .manual-link:hover {
-  color: #99cfff;
+  color: #ff4b33;
+  transform: scale(1.05);
 }
 
+/* Description */
 .car-description {
   line-height: 1.8;
-  color: #e0e0e0;
+  color: #f0f0f0;
   font-size: 1.6rem;
-  background-color: #1a1a1a;
-  padding: 1rem;
+  background: linear-gradient(135deg, #1a1a1a, #222);
+  padding: 1.5rem 2rem;
   border-radius: 1rem;
-  width: 60rem;
   text-align: center;
-  margin: 0 auto;
+  width: 90rem;
+  margin: 0 auto 4rem auto;
+  box-shadow: 0 0.3rem 1rem rgba(255,75,51,0.15);
 }
 
+/* Comments Section */
 .comments-section {
-  margin-top: 6rem;
+  margin-top: 5rem;
   background-color: #1a1a1a;
   padding: 3rem;
   border-radius: 1rem;
-  box-shadow: 0 0.4rem 1rem rgba(255,255,255,0.05);
+  box-shadow: 0 0.5rem 1.5rem rgba(255,75,51,0.1);
 }
 
 .comment {
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #333;
   padding: 2rem 0;
   color: #f0f0f0;
   font-size: 1.7rem;
@@ -173,34 +246,35 @@
 }
 
 .comment-date {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: #aaa;
-  margin-bottom: 1rem;
   font-style: italic;
   display: block;
 }
 
-
+/* Add Comment Form */
 .add-comment {
   max-width: 500px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background-color: #222;
-  border-radius: 0.8rem;
+  margin: 5rem auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, #1f1f1f, #222);
+  border-radius: 1rem;
   color: #eee;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  box-shadow: 0 0.5rem 1.5rem rgba(255,75,51,0.15);
 }
 
 .add-comment h4 {
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #f00101;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff4b33;
+  text-shadow: 0 0.1rem 0.2rem rgba(255,75,51,0.5);
 }
 
 .form-group {
   margin-bottom: 1.5rem;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .form-group label {
@@ -222,7 +296,8 @@
   color: #eee;
   resize: vertical;
   height: 3rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  width: 95%;
 }
 
 .form-group textarea:focus,
@@ -230,7 +305,7 @@
 .form-group input[type="email"]:focus,
 .form-group input[type="password"]:focus {
   outline: none;
-  border-color: #f00101;
+  border-color: #ff4b33;
   background-color: #292929;
 }
 
@@ -240,6 +315,7 @@
   color: #ff6b6b;
 }
 
+/* Checkbox Styles */
 .form-group input[type="checkbox"] {
   display: none;
 }
@@ -263,56 +339,5 @@
   background-color: #e70000;
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 0 8px #ff666699;
-}
-
-button[type="submit"] {
-  border: none;
-  color: white;
-  font-weight: 700;
-  font-size: 1.5rem;
-  padding: 1rem 2.5rem;
-  border-radius: 0.6rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #ff4b33;
-}
-
-
-
-
-
-
-
-
-
-
-.hashtags input[type="checkbox"] {
-  display: none;
-}
-
-.hashtags label {
-  display: inline-block;
-  margin: 0.4rem;
-  padding: 0.4rem 1rem;
-  border-radius: 2rem;
-  background-color: #d30505;
-  color: #cceeff;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-}
-
-.hashtags label:hover {
-  background-color: #c53030;
-}
-
-.hashtags input[type="checkbox"]:checked + span {
-  background-color: #e70000;
-  color: #fff;
-  font-weight: 600;
-  box-shadow: 0 0 8px #ff666699;
+  box-shadow: 0 0 8px #ff6666
 }

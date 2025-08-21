@@ -1,16 +1,25 @@
 .home-title {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-top: 2rem;
     color: #f44336;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    animation: fadeInDown 1s ease forwards;
+}
+
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .home-featured-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    padding: 2rem;
+    padding: 3rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -21,42 +30,199 @@
 }
 
 .home-car-card {
-    background-color: #1a1a1a;
+    background: linear-gradient(145deg, #1a1a1a, #111);
     border: 1px solid #333;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 1rem;
-    transition: transform 0.2s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.4s ease, border 0.3s ease;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-car-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(244,67,54,0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.home-car-card:hover::before {
+    opacity: 1;
 }
 
 .home-car-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 20px rgba(244, 67, 54, 0.3);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(244, 67, 54, 0.4);
+    border: 1px solid #f44336;
 }
 
 .home-car-image {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 1rem;
+    transition: transform 0.4s ease;
+}
+
+.home-car-card:hover .home-car-image {
+    transform: scale(1.05);
 }
 
 .home-car-brand {
     color: #fff;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     margin: 0.5rem 0;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(244, 67, 54, 0.6);
 }
 
 .home-car-price {
     color: #f44336;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     margin: 0.25rem 0;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.home-car-price:hover {
+    text-shadow: 0 0 8px rgba(244, 67, 54, 0.8);
 }
 
 .home-car-meta {
     color: #bbb;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     margin: 0.1rem 0;
+}
+
+/* HERO SECTION */
+.home-hero {
+    background: url("/static/img/hero.webp") center/cover no-repeat;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    color: #fff;
+    margin-top: 2rem;
+    border-radius: 12px; /* smooth rounded corners */
+    box-shadow: 0 15px 40px rgba(224, 0, 0, 0.6); /* soft shadow */
+    overflow: hidden; /* ensures shadow and rounded corners work together */
+}
+
+.home-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.home-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.home-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(244,67,54,0.7);
+}
+
+.home-hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn-primary {
+    background-color: #f44336;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ff6659;
+    transform: scale(1.05);
+}
+
+/* SECTION TITLES */
+.home-section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 4rem 0 2rem;
+    color: #f44336;
+    font-weight: 700;
+}
+
+/* CATEGORIES GRID */
+.home-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.home-category-card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.home-category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(244,67,54,0.4);
+    border: 1px solid #f44336;
+}
+
+/* STATS GRID */
+.home-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.home-stat-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    border: 1px solid #333;
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(244,67,54,0.3);
+}
+
+.home-stat-card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #f44336;
+}
+
+.home-stat-card p {
+    font-size: 1.2rem;
+    color: #bbb;
 }

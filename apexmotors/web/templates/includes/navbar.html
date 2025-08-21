@@ -2,6 +2,7 @@
     <a href="{% url 'home' %}" class="apex-navbar__brand">
         <p>Apex Motors</p>
     </a>
+
     <ul class="apex-navbar__menu">
         {% if user.is_authenticated %}
             <li><a href="{% url 'profile' user.id %}">My Profile</a></li>

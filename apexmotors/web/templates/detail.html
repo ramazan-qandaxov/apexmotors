@@ -81,18 +81,6 @@
           {% endif %}
         </div>
 
-        <!-- Hashtags field (checkboxes) -->
-
-        <div class="form-group">
-          <label>Hashtags</label>
-          {{ form.hashtags }}
-          {% if form.hashtags.errors %}
-            <div class="error">
-              {{ form.hashtags.errors }}
-            </div>
-          {% endif %}
-        </div>
-
         <button type="submit">Post Comment</button>
       </form>
     </div>

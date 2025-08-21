@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="home-title">Featured</h1>
 
+<!-- HERO SECTION -->
+<section class="home-hero">
+    <div class="home-hero-content">
+        <h1>Drive Your Dream Car</h1>
+        <p>Discover the best sports cars from top brands.</p>
+        <a href="{% url 'catalog' %}" class="btn-primary" style="color: black; :hover ">Explore Cars</a>
+    </div>
+</section>
+
+<!-- FEATURED CARS -->
+<h2 class="home-section-title">Featured Cars</h2>
 <div class="home-featured-grid">
     {% for car in cars|slice:":8" %}
     <a href="{% url 'car_detail' car.pk %}" class="home-card-link">
@@ -15,4 +25,38 @@
     </a>
     {% endfor %}
 </div>
+
+<!-- CATEGORIES SECTION -->
+<section class="home-categories">
+    <h2 class="home-section-title">Browse by Brand</h2>
+    <div class="home-categories-grid">
+        <a href="{% url 'catalog' %}?q=mercedes-benz" class="home-category-card">Mercedes-Benz</a>
+        <a href="{% url 'catalog' %}?q=bmw" class="home-category-card">BMW</a>
+        <a href="{% url 'catalog' %}?q=audi" class="home-category-card">AUDI</a>
+        <a href="{% url 'catalog' %}?q=ferrari" class="home-category-card">Ferrari</a>
+    </div>
+</section>
+
+<!-- PROMOTIONAL STATS SECTION -->
+<section class="home-stats">
+    <div class="home-stats-grid">
+        <div class="home-stat-card">
+            <h3>500+</h3>
+            <p>Cars Listed</p>
+        </div>
+        <div class="home-stat-card">
+            <h3>1000+</h3>
+            <p>Happy Customers</p>
+        </div>
+        <div class="home-stat-card">
+            <h3>50+</h3>
+            <p>Top Brands</p>
+        </div>
+        <div class="home-stat-card">
+            <h3>5+</h3>
+            <p>Years of Experience</p>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

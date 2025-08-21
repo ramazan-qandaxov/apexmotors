@@ -1,46 +1,60 @@
-/* Container styling */
+/* --- Container & Typography --- */
 .add-car-container {
-    padding: 2rem;
-    max-width: 65rem;
+    padding: 3rem;
+    max-width: 80rem;
     margin: auto;
-    font-family: Arial, sans-serif;
+    font-family: var(--font-main);
 }
 
-/* Welcome Heading */
 .add-car-container h1 {
-    font-size: 4rem;
+    font-size: 4.2rem;
     text-align: center;
     margin-bottom: 1rem;
-    color: #ff3333;
+    color: var(--primary-red);
+    font-weight: 700;
 }
 
-/* Subheading */
 .add-car-container p {
     text-align: center;
     font-size: 2rem;
-    color: #b6b1b1;
+    color: var(--text-muted);
     margin-bottom: 3rem;
 }
 
-/* Form Section */
+/* --- Form Styling --- */
 .add-car-form {
-    background-color: #00000044;
-    padding: 3rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    color: #fff;
+    background: linear-gradient(145deg, #1a1a1a, #111);
+    padding: 3.5rem;
+    border-radius: 1.6rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    color: var(--text-light);
     font-size: 1.6rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Form Heading */
+.add-car-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.25);
+}
+
 .add-car-form h2 {
-    color: #fff;
-    font-size: 2rem;
+    color: var(--text-light);
+    font-size: 2.4rem;
     margin-bottom: 2rem;
     text-align: center;
+    position: relative;
 }
 
-/* Form Layout */
+.add-car-form h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-red);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+}
+
 .add-car-form form {
     display: flex;
     flex-direction: column;
@@ -49,154 +63,152 @@
     width: 100%;
 }
 
-/* File Input */
+/* --- Labels --- */
 .add-car-form label {
-    font-weight: 500;
-    color: #e0e0e0;
+    font-weight: 600;
+    color: var(--text-light);
     display: flex;
-    text-align: start;
     width: 100%;
-    max-width: 40rem;
+    max-width: 45rem;
+    margin-bottom: 0.3rem;
 }
 
-/* File Input */
-.add-car-form input[type="file"] {
-    padding: 1.4rem;
-    border-radius: 0.8rem;
-    border: 1px solid #555;
-    background-color: #1e1e1e;
-    color: #ccc;
-    font-size: 1.5rem;
-    width: 100%;
-    max-width: 37rem;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-}
-
-.add-car-form input[type="file"]::file-selector-button {
-    background-color: #ff3333;
-    border: none;
-    color: #fff;
-    padding: 0.6rem 1.2rem;
-    border-radius: 0.6rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-right: 1rem;
-    font-weight: bold;
-}
-
-.add-car-form input[type="file"]::file-selector-button:hover {
-    background-color: #cc0000;
-}
-
-/* Submit Button */
-.add-car-form button[type="submit"] {
-    background-color: #ff3333;
-    color: #fff;
-    padding: 1rem 2rem;
-    width: 100%;
-    max-width: 25rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.add-car-form button[type="submit"]:hover {
-    background-color: #cc0000;
-    transform: translateY(-1px);
-}
-
-/* Django form fields */
-.add-car-form input:not([type="file"]),
+/* --- Inputs / Selects / Textareas --- */
+.add-car-form input[type="text"],
+.add-car-form input[type="number"],
+.add-car-form input[type="email"],
+.add-car-form input[type="password"],
+.add-car-form input[type="file"],
 .add-car-form select,
 .add-car-form textarea {
-    padding: 1rem;
+    padding: 1rem 1.4rem;
     border-radius: 0.8rem;
-    border: 1px solid #555;
+    border: 1px solid #333;
     background-color: #1e1e1e;
-    color: #fff;
+    color: var(--text-light);
     font-size: 1.6rem;
-    width: 40rem;
-    height: 6rem;
+    width: 100%;
+    max-width: 45rem;
     box-sizing: border-box;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    transition: all 0.3s ease;
 }
 
 .add-car-form input:focus,
 .add-car-form select:focus,
 .add-car-form textarea:focus {
-    outline: none;
-    border-color: #ff3333;
+    border-color: var(--primary-red);
     background-color: #2a2a2a;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.3);
 }
 
-/* Color options container */
+/* Remove number input arrows */
+.add-car-form input[type="number"]::-webkit-inner-spin-button,
+.add-car-form input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.add-car-form input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* --- File Upload --- */
+.add-car-form input[type="file"]::file-selector-button {
+    background-color: var(--primary-red);
+    border: none;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+.add-car-form input[type="file"]::file-selector-button:hover {
+    background-color: var(--accent-red);
+    transform: translateY(-1px);
+}
+
+/* --- Submit Button --- */
+.add-car-form button[type="submit"] {
+    background-color: var(--primary-red);
+    color: #fff;
+    padding: 1.2rem 2rem;
+    width: 100%;
+    max-width: 30rem;
+    font-size: 1.7rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(208, 0, 0, 0.3);
+}
+
+.add-car-form button[type="submit"]:hover {
+    background-color: var(--accent-red);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 77, 77, 0.4);
+}
+
+/* --- Color Options --- */
+.color-options-container {
+    width: 100%;
+    max-width: 45rem; /* Matches the max-width of other inputs */
+    margin-bottom: 2rem; /* Add some space below */
+}
+
 .color-options {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
-    width: 40rem;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+    gap: 1.2rem; /* Adds space between color choices */
 }
 
-/* Each color choice label */
 .color-option {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    font-size: 1.4rem;
-    color: #fff;
-    padding: 0.6rem;
-    background-color: #1a1a1a;
-    border-radius: 0.6rem;
-    width: 100%;
+    justify-content: flex-start;
+    gap: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    padding: 1rem 1.2rem;
+    background-color: #1e1e1e;
+    border-radius: 0.8rem;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-sizing: border-box;
 }
 
-/* Color circle */
+.color-option:hover {
+    border-color: var(--primary-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.25);
+}
+
 .color-circle {
-    width: 2rem;
-    height: 2rem;
+    width: 2.2rem;
+    height: 2.2rem;
     border-radius: 50%;
-    border: 1px solid #ccc;
+    border: 2px solid #444;
     flex-shrink: 0;
 }
+
 .color-option input[type="checkbox"] {
-    appearance: none;
-    width: 1.6rem;
-    height: 1.6rem;
-    border: 2px solid #ccc;
-    border-radius: 0.4rem;
-    background-color: #fff;
-    position: relative; /* нужно для ::after */
-    cursor: pointer;
-    transition: all 0.2s ease;
+    display: none;
 }
 
-.color-option input[type="checkbox"]:hover {
-    border-color: #ff3333;
+.color-option input[type="checkbox"]:checked + .color-circle {
+    border: 2px solid var(--primary-red);
+    box-shadow: 0 0 6px rgba(255, 77, 77, 0.6);
 }
 
-.color-option input[type="checkbox"]:checked {
-    background-color: #ff3333;
-    border-color: #ff3333;
-}
-
-.color-option input[type="checkbox"]:checked::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 4px;
-    height: 8px;
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
-    transform: translate(-50%, -50%) rotate(45deg); /* центрируем и поворачиваем */
+.color-option input[type="checkbox"]:checked ~ span {
+    font-weight: 600;
+    color: var(--primary-red);
 }
 
