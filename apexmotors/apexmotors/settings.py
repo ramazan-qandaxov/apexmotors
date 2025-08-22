@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_#xm_=1=s5i)^&8gylycu*#nou8%)$3ar&o36=!k&*1k40uf9k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['apexmotors.com', 'www.apexmotors.com', '127.0.0.1', 'localhost']
 
